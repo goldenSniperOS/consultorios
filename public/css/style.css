@@ -1,0 +1,190 @@
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.login{
+	display: inline;
+    position: relative;
+}
+
+.login img{
+	display: block;
+	margin: 0 auto;
+	width: 40%;
+}
+
+.no-padding{
+	padding: 0!important;
+}
+
+/*****ADMIN******/
+
+.top{
+	position: fixed;
+	width: 100%;
+	z-index: 99;
+}
+
+.top .logo,.top .topbar{
+	height: 50px;
+}
+
+.top .logo{
+	color: #fff;
+	font-size: 2em;
+	font-family: sans-serif;
+	text-align: center;
+	background: #c30112;
+	position: relative;
+}
+
+.top .logo span{
+	vertical-align: middle;
+}
+
+.top .topbar{
+	background: #444;
+}
+
+.top .topbar span{
+	font-size: 1.2em;
+	color: #fff;
+	padding: 0 50px;
+	vertical-align: middle;
+}
+.top .topbar a{
+	vertical-align: middle;
+	margin-right:50px;
+}
+/******NAVBAR*****/
+.navegador{
+	background: #444;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	margin-top: 50px;
+	padding: 0;
+}
+
+.navegador img{
+	display: block;
+	margin: 50px auto;
+	width: 50%;
+}
+
+.navegador nav ul{
+	list-style: none;
+	padding: 0;
+}
+
+.navegador nav ul li{
+	line-height: 60px;
+	padding: 0;
+	border-top: 1px dashed #fff;
+}
+
+.navegador nav ul li:last-child{
+	border-top: 1px dashed #fff;
+	border-bottom: 1px dashed #fff;
+}
+
+.navegador nav ul li a{
+	width: 100%;
+	text-decoration: none;
+	color: #fff;
+	font-size: 1.5em;
+	display: block;
+}
+
+.navegador nav ul li a span{
+	padding: 0 20px;
+}
+
+.navegador nav ul li a:hover{
+	background: #c30112;
+}
+
+.active{
+	background: #c30112;
+}
+
+/* when hovering over a .mainmenu item,
+  display the submenu inside it.
+  we're changing the submenu's max-height from 0 to 200px;
+*/
+
+.navegador nav ul li:hover .submenu {
+  display: block;
+  max-height: 200px;
+}
+
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+.submenu li a{
+  padding-left: 50px!important;
+  border-left: 5px solid steelblue;
+}
+
+.open .submenu{
+	display: block!important;
+  	max-height: 200px!important;
+}
+
+
+/*******CONTENIDO********/
+.contenido{
+	margin-left: 16.6666%;
+	margin-top: 50px;
+}
+/*****TABLAS*****/
+table td > span{
+	font-size: 1.5em;
+}
+table td{
+	font-size: 1.2em;
+	vertical-align: middle;
+}
+table tr{
+	vertical-align: middle;
+}
+
+/*********BOTONES*******/
+.nuevo{
+	border-radius: 50%!important;
+	font-size: 2.2em;
+	margin: 10px 0;
+	width: 50px;
+	height: 50px;
+	padding: 0;
+}
+
+.img-centered{
+	display: block;
+	margin: 0 auto;
+}
+/********CONTENIDOS CENTRADOS*******/
+.detail-logueo{
+	display: inline-block;
+    vertical-align: middle;
+    float: none;
+    padding: 10% 0;
+}
+.detail-click{
+	display: inline-block;
+    vertical-align: middle;
+    float: none;
+    margin-bottom: 3%;
+}
+
