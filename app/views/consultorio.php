@@ -44,8 +44,8 @@ if(Session::exists('erroresedit')){
 						<li class="open"><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
 						        <li><a href="usuarios.php">Usuarios</a></li>
-						        <li><a href="cargos.php">Cargos</a></li>
-						        <li ><a class="active" href="consultorio.php" >Consultorios</a></li>
+						        <li><a href="<?=URL::to('cargos/index')?>">Cargos</a></li>
+						        <li ><a class="active" href="<?=URL::to('consultorios/index')?>" >Consultorios</a></li>
 						     </ul>
 						</li>
 					</ul>

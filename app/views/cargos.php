@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Cargos</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/jquery.dataTables.min.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/style.css')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -22,7 +22,7 @@
 		</row>
 		<row>
 			<div class="col-xs-2 navegador">
-				<img src="img/user.png" alt="">
+				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
 						<li><a href="admin.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
@@ -34,8 +34,8 @@
 						<li class="open"><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
 						        <li><a href="usuarios.php">Usuarios</a></li>
-						        <li><a  class="active" href="cargos.php">Cargos</a></li>
-						        <li ><a href="consultorio.php" >Consultorios</a></li>
+						        <li><a  class="active" href="<?=URL::to('cargos/index')?>">Cargos</a></li>
+						        <li ><a href="<?=URL::to('consultorios/index')?>" >Consultorios</a></li>
 						     </ul>
 						</li>
 					</ul>
@@ -48,10 +48,37 @@
 				</h3>
 			</div>
 			<div class="pull-right">
-				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formConsulta">+</a>
+				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formCargo">+</a>
 			</div>
 			<!-- Modal -->
-			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
+			<div class="modal fade" id="formCargo" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="container-fluid">
+			          <div class="row">
+			            <div class="col-md-12">
+			            	<div class="form-group">
+								<label for="NombreCargo">Nombre del Cargo</label>
+								<input type="text" name="NombreCargo" id="NombreCargo" class="form-control">
+							</div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Guardar</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="formCargo" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -137,8 +164,8 @@
 			</div>
 		</row>
 	</div>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
+	<?=HTML::script('js/jquery.dataTables.min.js')?>
+	<?=HTML::script('js/bootstrap.min.js')?>
 </body>
 </html>
