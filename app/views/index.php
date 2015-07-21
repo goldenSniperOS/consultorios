@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Iniciar Sesión | Consultorio</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/style.css')?>
 </head>
 <body>
 <div class="outer">
@@ -14,7 +14,7 @@
 			<div class="login">
 				<div class="col-xs-4 col-xs-offset-4 well ">
 					<h3 class="text-info text-center">Iniciar Sesion</h3>
-					<img src="img/logo.png" alt="" align="center">
+					<?=HTML::image('img/logo.png')?>
 					<form>
 					  <div class="form-group">
 					    <label for="Usuario">Usuario</label>
@@ -32,6 +32,5 @@
 	</div>
 </div>
 </div>
-	
 </body>
 </html>

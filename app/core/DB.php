@@ -193,7 +193,7 @@ class DB{
 
 	public function getFirst(){
 		$query = implode(" ", $this->sqlFinal);
-		$this->query($query)
+		$this->query($query);
 		if($this->count() > 0){
 			return $this->results()[0];
 		}

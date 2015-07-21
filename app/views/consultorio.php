@@ -1,11 +1,21 @@
+<?php
+if(Session::exists('errores')){
+	$errores = Session::flash('errores');
+}
+
+if(Session::exists('erroresedit')){
+	$erroresedit = Session::flash('erroresedit');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Consultorio</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/jquery.dataTables.min.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/style.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -22,7 +32,7 @@
 		</row>
 		<row>
 			<div class="col-xs-2 navegador">
-				<img src="img/user.png" alt="">
+				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
 						<li><a href="admin.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
@@ -48,32 +58,72 @@
 				</h3>
 			</div>
 			<div class="pull-right">
-				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formConsulta">+</a>
+				<a href="#" class="btn btn-success nuevo" data-toggle="modal" data-target="#formConsultorio">+</a>
 			</div>
 			<!-- Modal -->
-			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
+			<div class="modal fade" id="formConsultorio" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
+			    <form action="<?=URL::to('consultorios/registrarconsultorio')?>" method="POST">
+			    <?php echo (isset($errores['NombreConsultorio'])) ? '<script>$(document).ready(function(){$("#formConsultorio").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
 			      </div>
-			      <div class="modal-body">
-			        <div class="container-fluid">
-			          <div class="row">
-			            <div class="col-md-12">
-			            	<div class="form-group">
-								<label for="NombreConsultorio">Nombre del Consultorio</label>
-								<input type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
-							</div>
-			            </div>
-			          </div>
-			        </div>
-			      </div>
-			      <div class="modal-footer">
+				      <div class="modal-body">
+				        <div class="container-fluid">
+				          <div class="row">
+				            <div class="col-md-12">
+				            	<div class="form-group <?=(isset($errores['NombreConsultorio']))?'has-error':''?>">
+									<label for="NombreConsultorio">Nombre del Consultorio</label>
+									<input type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
+									<?php if(isset($errores['NombreConsultorio'])): ?>
+                                    <p class="help-block"><?=$errores['NombreConsultorio']?></p>
+                                    <?php endif; ?>
+								</div>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Guardar</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="formConsultorioEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    <form action="<?=URL::to('consultorios/editarconsultorio')?>" method="POST">
+			    <?php echo (isset($erroresedit['NombreConsultorio'])) ? '<script>$(document).ready(function(){$("#formConsultorioEdit").modal({show:true})});</script>':''?>
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Consulta</h4>
+			      </div>
+				      <div class="modal-body">
+				        <div class="container-fluid">
+				          <div class="row">
+				            <div class="col-md-12">
+				            	<div class="form-group <?=(isset($erroresedit['NombreConsultorio']))?'has-error':''?>">
+									<label for="NombreConsultorio">Nombre del Consultorio</label>
+									<input type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
+									<?php if(isset($erroresedit['NombreConsultorio'])): ?>
+                                    <p class="help-block"><?=$erroresedit['NombreConsultorio']?></p>
+                                    <?php endif; ?>
+								</div>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				      <div class="modal-footer">
+				      <input type="hidden" name="id">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+			      </form>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
@@ -91,46 +141,30 @@
 					            </tr>
 					        </thead>		 				 
 					        <tbody>
-					            <tr>
-					                <td>Adrian Ruiz</td>
-					                <td><p class="label label-success">Activo</p></td>
-					                <td>
-				                	<!-- Split button -->
-									<div class="btn-group">
-									  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></button>
-									  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    <span class="caret"></span>
-									    <span class="sr-only">Toggle Dropdown</span>
-									  </button>
-									  <ul class="dropdown-menu">
-									    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-check"></span> Habilitar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Inhabilitar</a></li>
-									  </ul>
-									</div>
-									<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-print"></span></button>
-					                </td>
-					            </tr>
-					            <tr>
-					                <td>Adrian Ruiz</td>
-					                <td><p class="label label-danger">Inactivo</p></td>
-					                <td>
-				                	<!-- Split button -->
-									<div class="btn-group">
-									  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></button>
-									  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    <span class="caret"></span>
-									    <span class="sr-only">Toggle Dropdown</span>
-									  </button>
-									  <ul class="dropdown-menu">
-									    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-check"></span> Habilitar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Inhabilitar</a></li>
-									  </ul>
-									</div>
-									<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-print"></span></button>
-					                </td>
-					            </tr>
+					        	<?php if($consultorios): ?>
+						        	<?php foreach ($consultorios as $consultorio): ?>
+							        	<tr>
+							        		<td><?=$consultorio->Nombre?></td>
+							        		<td><?=($consultorio->Activo == 'SI')?'<p class="label label-success">Activo</p>':'<p class="label label-danger">Inactivo</p>'?></td>
+							        		<td>
+											<div class="btn-group">
+											  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></button>
+											  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											    <span class="caret"></span>
+											    <span class="sr-only">Toggle Dropdown</span>
+											  </button>
+											  <ul class="dropdown-menu">
+											    <li><a id="<?=$consultorio->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultorioEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+											    <li><a href="<?=URL::to('consultorios/habilitar/'.$consultorio->id)?>"><span class="glyphicon glyphicon-check"></span> Habilitar</a></li>
+											    <li><a href="<?=URL::to('consultorios/inhabilitar/'.$consultorio->id)?>"><span class="glyphicon glyphicon-remove-circle"></span> Inhabilitar</a></li>
+											    <li><a href="<?=URL::to('consultorios/eliminar/'.$consultorio->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
+											  </ul>
+											</div>
+											<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-print"></span></button>
+							                </td>
+							        	</tr>
+						        	<?php endforeach; ?>
+					        	<?php endif; ?>
 					        </tbody>
 					   	</table>
 						  </div>
@@ -141,8 +175,34 @@
 			</div>
 		</row>
 	</div>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<?=HTML::script('js/bootstrap.min.js')?>
+	<script>
+	$('.editar').on('click',function(e){
+		e.preventDefault();
+		$.ajax({
+			method:'post',
+			url:'<?=URL::to("consultorios/editarconsultorioajax")?>',
+			dataType:'json',
+			data:{
+				id:$(this).attr('id')
+			},
+			success: function(response){
+				$('#formConsultorioEdit [name=NombreConsultorio]').val(response.Nombre);
+				$('#formConsultorioEdit [name=id]').val(response.id);
+			},
+			error: function(){
+				console.log('Fracaso');
+			}
+		})
+	});
+	$(document).ready(function(){
+		$('.eliminar').on('click',function(e){
+			e.preventDefault();
+			if(confirm('¿Desea Eliminar el Consultorio?')){
+				window.location = $(this).attr('href');
+			}
+		});
+	});
+	</script>
 </body>
 </html>

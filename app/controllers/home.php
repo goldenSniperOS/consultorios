@@ -5,5 +5,4 @@ class Home
 	{
 		View::render('index');
 	}
-
 }

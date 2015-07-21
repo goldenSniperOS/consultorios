@@ -50,7 +50,6 @@ return array(
 		'cookie_name' => 'hash',
 		'cookie_expiry' => 604800
 	),
-
 	/*
 	|--------------------------------------------------------------------------
 	| Variables de Sesión - Tabla de Sesiones en Base de Datos - Recordar Siempre
@@ -82,10 +81,10 @@ return array(
 	*/
 	'groups' => array(
 		'activeDatabase' => true,
-		'table' => 'tbgrupos',
-		'prefix' => 'GRU',
-		'primaryKey' => 'grupo_Codigo',
-		'permissionField' => 'grupo_Permisos',
+		'table' => 'cargo',
+		'prefix' => 'CAR',
+		'primaryKey' => 'id',
+		'permissionField' => 'Permisos',
 	),
 	/*
 	|--------------------------------------------------------------------------
@@ -96,9 +95,9 @@ return array(
 	| Logueado o no
 	*/
 	'user' => [
-		'user_class' => 'Persona',
-		'userField' => 'per_Usuario',
-		'passwordField' => 'per_Contrasena',
+		'user_class' => 'Usuario',
+		'userField' => 'Documento',
+		'passwordField' => 'Contrasena',
 	]
 );
 
