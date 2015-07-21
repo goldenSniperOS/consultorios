@@ -32,7 +32,7 @@
 						</li>
 						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
-						        <li><a href="">Usuarios</a></li>
+						        <li><a href="">Usuarios MAS LOLAZO DE QUE LA CSM!!!! :v </a></li>
 						        <li><a href="">Cargos</a></li>
 						        <li><a href="">Consultorios</a></li>
 						     </ul>
@@ -43,7 +43,7 @@
 			<div class="col-xs-10 contenido well">
 			<div class="alert alert-info">
 				<h3 class="text-center">
-					HISTORIAL MEDICO
+					HISTORIAL MEDICO Osea que onda e.e
 				</h3>
 			</div>
 			<div class="row">
