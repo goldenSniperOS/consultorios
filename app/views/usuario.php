@@ -51,11 +51,11 @@ if(Session::exists('erroresedit')){
 				</nav>
 			</div>
 			<div class="col-xs-10 contenido well">
-			<div class="alert alert-info">
-				<h3 class="text-center">
-					USUARIOS
-				</h3>
-			</div>
+				<div class="alert alert-info">
+					<h3 class="text-center">
+						USUARIOS
+					</h3>
+				</div>
 			<div class="pull-right">
 				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formPaciente">+</a>
 			</div>
@@ -67,6 +67,7 @@ if(Session::exists('erroresedit')){
 			    <?php echo (isset($errores['Documento'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 			    <?php echo (isset($errores['NombreCompleto'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 			    <?php echo (isset($errores['Consultorio'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Cargo'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 			    <?php echo (isset($errores['Contrasena'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 
 			      <div class="modal-header">
@@ -86,11 +87,18 @@ if(Session::exists('erroresedit')){
 							</div>
 			            </div>
 			            <div class="col-md-6">
-			            	<div class="form-group ">
+			            	<div class="form-group <?=(isset($errores['Cargo']))?'has-error':''?>">
 								<label for="Cargo">Tipo de Usuario</label>
+								<?php if($cargos): ?>
 								<select class="form-control" id="Cargo" name="Cargo">
-									<option value="Ninguno">--Tipo de Usuario--</option>
+								<?php foreach ($cargos as $cargo): ?>Cargo
+									<option value="<?=$cargo->id?>"><?=$cargo->Nombre?></option>			
+								<?php endforeach; ?>
 								</select>
+								<?php endif; ?>
+								<?php if(isset($errores['Cargo'])): ?>
+								<p class="help-block"><?=$errores['Cargo']?></p>
+                                <?php endif; ?>
 							</div>
 			            </div>
 			          </div>
@@ -148,6 +156,7 @@ if(Session::exists('erroresedit')){
 			    <?php echo (isset($erroresedit['Documento'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			    <?php echo (isset($erroresedit['NombreCompleto'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			    <?php echo (isset($erroresedit['Consultorio'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Cargo'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			    <?php echo (isset($erroresedit['Contrasena'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -166,11 +175,18 @@ if(Session::exists('erroresedit')){
 							</div>
 			            </div>
 			            <div class="col-md-6">
-			            	<div class="form-group ">
+			            	<div class="form-group <?=(isset($erroresedit['Cargo']))?'has-error':''?>">
 								<label for="Cargo">Tipo de Usuario</label>
+								<?php if($cargos): ?>
 								<select class="form-control" id="Cargo" name="Cargo">
-									<option value="Ninguno">--Tipo de Usuario--</option>
+									<?php foreach ($cargos as $cargo): ?>
+									<option value="<?=$cargo->id?>"><?=$cargo->Nombre?></option>			
+									<?php endforeach; ?>
 								</select>
+								<?php endif; ?>
+								<?php if(isset($erroresedit['Cargo'])): ?>
+								<p class="help-block"><?=$erroresedit['Cargo']?></p>
+                                <?php endif; ?>
 							</div>
 			            </div>
 			          </div>
@@ -244,7 +260,13 @@ if(Session::exists('erroresedit')){
 						            <tr>
 						                <td><?=$usuario->Documento?></td>
 						                <td><?=$usuario->NombreCompleto?></td>
-						                <td><?=$usuario->Cargo?></td>
+						                <td>
+												<?php foreach ($cargos as $cargo): ?>
+													<?php if ($usuario->Cargo == $cargo->id): ?>
+														<?=$cargo->Nombre?>
+													<?php endif ?>		
+												<?php endforeach; ?>
+						                </td>
 						                <td><?=($usuario->Activo == 'SI')?'<p class="label label-success">Activo</p>':'<p class="label label-danger">Inactivo</p>'?></td>
 						                <td>
 					                	<!-- Split button -->
@@ -256,6 +278,8 @@ if(Session::exists('erroresedit')){
 										  </button>
 										  <ul class="dropdown-menu">
 										  	<li><a id="<?=$usuario->id?>" class="editar" href="#" data-toggle="modal" data-target="#formPacienteEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+										  	<li><a href="<?=URL::to('usuarios/habilitar/'.$usuario->id)?>"><span class="glyphicon glyphicon-check"></span> Habilitar</a></li>
+											<li><a href="<?=URL::to('usuarios/inhabilitar/'.$usuario->id)?>"><span class="glyphicon glyphicon-remove-circle"></span> Inhabilitar</a></li>
 										    <li><a href="<?=URL::to('usuarios/eliminar/'.$usuario->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
 										  </ul>
 										</div>
@@ -297,6 +321,7 @@ if(Session::exists('erroresedit')){
 				$('#formPacienteEdit [name=Documento]').val(response.Documento);
 				$('#formPacienteEdit [name=Nombre]').val(response.NombreCompleto);
 				$('#formPacienteEdit [name=Consultorio]').val(response.Consultorio);
+				$('#formPacienteEdit [name=Cargo]').val(response.Cargo);
 				$('#formPacienteEdit [name=Contrasena]').val(response.Contrasena);
 				$('#formPacienteEdit [name=id]').val(response.id);
 			},

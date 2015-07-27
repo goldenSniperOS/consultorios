@@ -4,7 +4,8 @@
 		public function index(){
 			$usuarios = Usuario::all();
 			$consultorios = Consultorio::all();
-			View::render('usuario',['usuarios' => $usuarios,'consultorios' => $consultorios]);
+			$cargos = Cargo::all();
+			View::render('usuario',['usuarios' => $usuarios,'consultorios' => $consultorios,'cargos'=> $cargos]);
 		}
 
 		public function registrarusuario(){
@@ -17,22 +18,25 @@
                         'max' => 8
                     ],
                     'Nombre' => [
-                    'required' => true,
-                    'min' => 10,
-                    'max' => 50
+                    	'required' => true,
+                    	'min' => 10,
+                    	'max' => 50
                     ],
                     'Consultorio' => [
                         'required' => true
                     ],
                     'Contrasena' => [
-                    'required' => true
+                    	'required' => true
+                    ],
+                    'Cargo' => [
+                        'required' => true
                     ]
                 ]);
                 if($validation->passed()){
                 	/*Insercion de un Usuario*/
 					Usuario::create([
 						'Documento' => Input::get('Documento'),
-						'Cargo' => Null ,
+						'Cargo' => Input::get('Cargo') ,
 						'NombreCompleto' => Input::get('Nombre'),
 						'Consultorio' => Input::get('Consultorio'),
 						'Contrasena' => Input::get('Contrasena')
@@ -58,22 +62,25 @@
                         'min' => 8,
                         'max' => 8
                     ],
-                    'Nombre' => [
-                    'required' => true,
-                    'min' => 10,
-                    'max' => 50
+                    	'Nombre' => [
+                    	'required' => true,
+                    	'min' => 10,
+                    	'max' => 50
                     ],
                     'Consultorio' => [
                         'required' => true
                     ],
                     'Contrasena' => [
-                    'required' => true
+                    	'required' => true
+                    ],
+                    'Cargo' => [
+                    	'required' => true
                     ]
                 ]);
             if($validation->passed()){
 				Usuario::update([
 					'Documento' => Input::get('Documento'),
-					'Cargo' => Null ,
+					'Cargo' => Input::get('Cargo') ,
 					'NombreCompleto' => Input::get('Nombre'),
 					'Consultorio' => Input::get('Consultorio'),
 					'Contrasena' => Input::get('Contrasena')
@@ -86,6 +93,20 @@
 
 		public function eliminar($param){
 			DB::getInstance()->delete('usuario',[['id','=',$param]]);
+			Redirect::to('usuarios/index');
+		}
+
+		public function habilitar($param){
+			Usuario::update([
+				'Activo' => 'SI'
+			],$param);
+			Redirect::to('usuarios/index');
+		}
+
+		public function inhabilitar($param){
+			Usuario::update([
+				'Activo' => 'NO'
+			],$param);
 			Redirect::to('usuarios/index');
 		}
 	}
