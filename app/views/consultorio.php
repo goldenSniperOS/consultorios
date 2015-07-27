@@ -36,7 +36,7 @@ if(Session::exists('erroresedit')){
 				<nav>
 					<ul>
 						<li><a href="admin.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
-						<li><a href="pacientes.php" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
+						<li><a href="<?=URL::to('pacientes/index')?>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
 						<li><a href="consultamedica.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
 						<li><a href="citamedica.php"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
@@ -204,5 +204,10 @@ if(Session::exists('erroresedit')){
 		});
 	});
 	</script>
+
+
+	<!-- 
+		consultorios/eliminar/'.$consultorio->id
+	-->
 </body>
 </html>

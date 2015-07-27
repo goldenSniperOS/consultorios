@@ -1,10 +1,10 @@
 <?php
 	class Consultorios
 	{
-		public function index(){
-			$consultorios = Consultorio::all();
-			View::render('consultorio',['consultorios' => $consultorios]);
-		}
+			public function index(){
+				$consultorios = Consultorio::all();
+				View::render('consultorio',['consultorios' => $consultorios]);
+			}
 
 		public function registrarconsultorio(){
 			if(Input::exists()){
