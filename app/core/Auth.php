@@ -26,7 +26,7 @@ class Auth
 					Session::put('isLogguedIn',true);
 					Session::put(Config::get('session/session_name'),$user);
 					if(Config::get('groups/activeDatabase')){
-						Session::put('listPermission'),self::getPermissions($user));
+						Session::put('listPermission',self::getPermissions($user));
 					}
 					if($remember && Config::get('session/activeDatabase')){
 						$hash = Hash::unique();
@@ -62,7 +62,7 @@ class Auth
 		}
 		Session::delete('isLogguedIn');
 		if(Config::get('groups/activeDatabase')){
-			Session::delete('listPermission'));
+			Session::delete('listPermission');
 		}
 		Session::delete(Config::get('session/session_name'));
 		Cookie::delete(Config::get('remember/cookie_name'));
@@ -78,9 +78,9 @@ class Auth
 	}
 
 	public function hasPermission($key){
-		if(Session::exists('listPermission'))){
-			if(property_exists(Session::get('listPermission')), $key)){
-				return Session::get('listPermission'))->{$key};
+		if(Session::exists('listPermission')){
+			if(property_exists(Session::get('listPermission'), $key)){
+				return Session::get('listPermission')->{$key};
 			}
 		}
 		return false;
@@ -91,14 +91,14 @@ class Auth
 			return Session::get('isLogguedIn');
 		}else{
 			if(Cookie::exists(Config::get('remember/cookie_name'))){
-				$hashCheck = DB::getInstance()
-					->table(Config::get('session/table')
-					->where(Config::get('session/hashField'),'=',Cookie::get(Config::get('remember/cookie_name')))
-					->getFirst();
+
+				$hashCheck = DB::getInstance()->table(Config::get('session/table'))
+								->where(Config::get('session/hashField'),'=',Cookie::get(Config::get('remember/cookie_name')))
+								->getFirst();
 				if($hashCheck){
 					$class = Config::get('user/user_class');
 					$user = $class::find($hashCheck->{Config::get('session/primaryKey')});				
-					Session::put('listPermission'),self::getPermissions($user));
+					Session::put('listPermission',self::getPermissions($user));
 					Session::put('isLogguedIn',true);
 					Session::put(Config::get('session/session_name'),$user);
 					return Session::get('isLogguedIn');

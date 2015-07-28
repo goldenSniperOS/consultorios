@@ -6,7 +6,6 @@ if(Session::exists('errores')){
 if(Session::exists('erroresedit')){
 	$erroresedit = Session::flash('erroresedit');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,17 +34,17 @@ if(Session::exists('erroresedit')){
 				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
-						<li><a href="admin.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
+						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
 						<li><a href="<?=URL::to('pacientes/index')?>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
-						<li><a href="consultamedica.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
-						<li><a href="citamedica.php"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
+						<li><a href="<?=URL::to('consultas/index')?>" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
+						<li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
 						</li>
 						<li class="open"><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
-						        <li><a href="usuarios.php">Usuarios</a></li>
+						        <li><a href="<?=URL::to('usuarios/index')?>">Usuarios</a></li>
 						        <li><a href="<?=URL::to('cargos/index')?>">Cargos</a></li>
-						        <li ><a class="active" href="<?=URL::to('consultorios/index')?>" >Consultorios</a></li>
+						        <li><a class="active" href="<?=URL::to('consultorios/index')?>">Consultorios</a></li>
 						     </ul>
 						</li>
 					</ul>
@@ -204,8 +203,6 @@ if(Session::exists('erroresedit')){
 		});
 	});
 	</script>
-
-
 	<!-- 
 		consultorios/eliminar/'.$consultorio->id
 	-->

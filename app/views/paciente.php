@@ -14,6 +14,7 @@ if(Session::exists('erroresedit')){
 	<meta charset="UTF-8">
 	<title>Administrador | Paciente</title>
 	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
 	<?=HTML::style('css/style.css')?>
 	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
@@ -35,17 +36,17 @@ if(Session::exists('erroresedit')){
 				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
-						<li><a href="admin.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
+						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
 						<li><a href="<?=URL::to('pacientes/index')?>" class="active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
-						<li><a href="consultamedica.php" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
-						<li><a href="citamedica.php"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
+						<li><a href="<?=URL::to('consultas/index')?>"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
+						<li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
 						</li>
 						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
 						        <li><a href="<?=URL::to('usuarios/index')?>">Usuarios</a></li>
-						       	<li><a href="<?=URL::to('cargos/index')?>">Cargos</a></li>
-						        <li ><a href="<?=URL::to('consultorios/index')?>" >Consultorios</a></li>
+						        <li><a href="<?=URL::to('cargos/index')?>">Cargos</a></li>
+						        <li><a href="<?=URL::to('consultorios/index')?>">Consultorios</a></li>
 						     </ul>
 						</li>
 					</ul>

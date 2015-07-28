@@ -6,20 +6,21 @@
 			View::render('cargos',['cargos' => $cargos]);
 		}
 
-		public function registrarconsultorio(){
+		public function registrarcargo(){
 			if(Input::exists()){
 				$validate = new Validate();
 	            $validation = $validate->check($_POST,[
                     'NombreCargo' => [
                         'required' => true,
-                        'min' => 10,
+                        'min' => 4,
                         'max' => 50
                     ]
                 ]);
                 if($validation->passed()){
-                	/*Insercion de un Consultorio*/
+                	/*Insercion de un cargo*/
 					Cargo::create([
-						'Nombre' => Input::get('NombreCargo')
+						'Nombre' => Input::get('NombreCargo'),
+						'Permisos' => json_encode(['admin' => false,'citas' => false,'consultas'=>false,'pacientes' =>false])
 					]);
 				}else{
 					Session::flash('errores',$validation->errors());
@@ -28,59 +29,59 @@
 			Redirect::to('cargos/index');
 		}
 
-		public function editarconsultorioajax(){
+		public function editarcargoajax(){
 			$id = Input::get('id');
-			$consultorio = Consultorio::find($id);
-			echo json_encode($consultorio);
+			$cargo = Cargo::find($id);
+			echo json_encode($cargo);
 		}
 
 		public function test(){
-			//$consultorios = DB::getInstance()->query('SELECT * FROM consultorio WHERE Activo = "SI"')->results();
-			$consultorios = DB::getInstance()->table('consultorio')
+			//$cargos = DB::getInstance()->query('SELECT * FROM cargo WHERE Activo = "SI"')->results();
+			$cargos = DB::getInstance()->table('cargo')
 											->where('Activo','SI')
 											->orWhere()
-											->join('usuarios','usuario.id','=','consultorio.id')
+											->join('usuarios','usuario.id','=','cargo.id')
 											->exec();
 			echo '<pre>';
-			var_dump($consultorios);
+			var_dump($cargos);
 			echo '</pre>';
 		}
 
-		public function editarconsultorio(){
+		public function editarcargo(){
 			$validate = new Validate();
             $validation = $validate->check($_POST,[
-                'NombreConsultorio' => [
+                'NombreCargo' => [
                     'required' => true,
                     'min' => 10,
                     'max' => 50
                 ]
             ]);
             if($validation->passed()){
-				Consultorio::update([
-					'Nombre' => Input::get('NombreConsultorio')
+				Cargo::update([
+					'Nombre' => Input::get('NombreCargo')
 				],Input::get('id'));
 			}else{
 				Session::flash('erroresedit',$validation->errors());
 			}
-			Redirect::to('consultorios/index');
+			Redirect::to('cargos/index');
 		}
 
-		public function habilitar($param){
-			Consultorio::update([
+		/*public function habilitar($param){
+			Cargo::update([
 				'Activo' => 'SI'
 			],$param);
-			Redirect::to('consultorios/index');
+			Redirect::to('cargos/index');
 		}
 
 		public function inhabilitar($param){
-			Consultorio::update([
+			Cargo::update([
 				'Activo' => 'NO'
 			],$param);
-			Redirect::to('consultorios/index');
-		}
+			Redirect::to('cargos/index');
+		}*/
 
 		public function eliminar($param){
-			DB::getInstance()->delete('consultorio',[['id','=',$param]]);
-			Redirect::to('consultorios/index');
+			DB::getInstance()->delete('cargo',[['id','=',$param]]);
+			Redirect::to('cargos/index');
 		}		
 	}
