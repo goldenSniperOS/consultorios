@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Cargos</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/jquery.dataTables.min.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/style.css')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -22,7 +22,7 @@
 		</row>
 		<row>
 			<div class="col-xs-2 navegador">
-				<img src="img/user.png" alt="">
+				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
 						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
@@ -44,39 +44,12 @@
 			<div class="col-xs-10 contenido well">
 			<div class="alert alert-info">
 				<h3 class="text-center">
-					CARGOS
+					PERMISOS DEL CARGO : <?=$cargo->Nombre?>
 				</h3>
 			</div>
-			<div class="pull-right">
-				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formConsulta">+</a>
+			<div class="pull-left">
+				<a href="<?=URL::to('cargos/index')?>" class="btn btn-success nuevo"><span class="glyphicon glyphicon-arrow-left"></span></a>
 			</div>
-			<!-- Modal -->
-			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
-			      </div>
-			      <div class="modal-body">
-			        <div class="container-fluid">
-			          <div class="row">
-			            <div class="col-md-12">
-			            	<div class="form-group">
-								<label for="NombreCargo">Nombre del Cargo</label>
-								<input type="text" name="NombreCargo" id="NombreCargo" class="form-control">
-							</div>
-			            </div>
-			          </div>
-			        </div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Guardar</button>
-			      </div>
-			    </div><!-- /.modal-content -->
-			  </div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="list-group">
@@ -93,25 +66,25 @@
 					            <tr>
 					                <td>Administracion</td>
 					                <td>
-									<button type="button" class="btn btn-success administracion">Activo</button>
+									<a href="<?=(json_decode($cargo->Permisos)->admin)?(URL::to('cargos/inhabilitarpermiso/admin/'.$cargo->id)):(URL::to('cargos/habilitarpermiso/admin/'.$cargo->id))?>" class="btn btn-<?=(json_decode($cargo->Permisos)->admin)?'success':'danger'?> administracion"><?=(json_decode($cargo->Permisos)->admin)?'Activo':'No Activo'?></button>
 					                </td>
 					            </tr>
 					            <tr>
 					                <td>Crear Citas</td>
 					                <td>
-									<button type="button" class="btn btn-danger citas">No Activo</button>
+									<a href="<?=(json_decode($cargo->Permisos)->citas)?URL::to('cargos/inhabilitarpermiso/citas/'.$cargo->id):URL::to('cargos/habilitarpermiso/citas/'.$cargo->id)?>" class="btn btn-<?=(json_decode($cargo->Permisos)->citas)?'success':'danger'?> citas"><?=(json_decode($cargo->Permisos)->citas)?'Activo':'No Activo'?></button>
 					                </td>
 					            </tr>
 					            <tr>
 					                <td>Crear Consultas</td>
 					                <td>
-									<button type="button" class="btn btn-success consultas">Activo</button>
+									<a href="<?=(json_decode($cargo->Permisos)->consultas)?URL::to('cargos/inhabilitarpermiso/consultas/'.$cargo->id):URL::to('cargos/habilitarpermiso/consultas/'.$cargo->id)?>" class="btn btn-<?=(json_decode($cargo->Permisos)->consultas)?'success':'danger'?> consultas"><?=(json_decode($cargo->Permisos)->consultas)?'Activo':'No Activo'?></button>
 					                </td>
 					            </tr>
 					            <tr>
 					                <td>Crear Pacientes</td>
 					                <td>
-									<button type="button" class="btn btn-success pacientes">Activo</button>
+									<a href="<?=(json_decode($cargo->Permisos)->pacientes)?URL::to('cargos/inhabilitarpermiso/pacientes/'.$cargo->id):URL::to('cargos/habilitarpermiso/pacientes/'.$cargo->id)?>" class="btn btn-<?=(json_decode($cargo->Permisos)->pacientes)?'success':'danger'?> pacientes"><?=(json_decode($cargo->Permisos)->pacientes)?'Activo':'No Activo'?></button>
 					                </td>
 					            </tr>					            
 					        </tbody>
@@ -125,8 +98,8 @@
 			</div>
 		</row>
 	</div>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
+	<?=HTML::script('js/jquery.dataTables.min.js')?>
+	<?=HTML::script('js/bootstrap.min.js')?>
 </body>
 </html>

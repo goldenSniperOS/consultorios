@@ -15,6 +15,7 @@ if(Session::exists('erroresedit')){
 	<?=HTML::style('css/bootstrap.min.css')?>
 	<?=HTML::style('css/style.css')?>
 	<?=HTML::style('css/jquery.dataTables.min.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -67,7 +68,7 @@ if(Session::exists('erroresedit')){
 			    	<?php echo (isset($errores['NombreCargo'])) ? '<script>$(document).ready(function(){$("#formCargo").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nuevo Cargo</h4>
 			      </div>
 			      <div class="modal-body">
 			        <div class="container-fluid">
@@ -97,17 +98,21 @@ if(Session::exists('erroresedit')){
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('cargos/editarcargo')?>" method="POST">
+			    <?php echo (isset($erroresedit['NombreCargo'])) ? '<script>$(document).ready(function(){$("#formCargoEdit").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Cargo</h4>
 			      </div>
 			      <div class="modal-body">
 			        <div class="container-fluid">
 			          <div class="row">
 			            <div class="col-md-12">
-			            	<div class="form-group">
+			            	<div class="form-group <?=(isset($erroresedit['NombreCargo']))?'has-error':''?>">
 								<label for="NombreCargo">Nombre del Cargo</label>
 								<input type="text" name="NombreCargo" id="NombreCargo" class="form-control">
+								<?php if(isset($erroresedit['NombreCargo'])): ?>
+								<p class="help-block"><?=$erroresedit['NombreCargo']?></p>
+                                <?php endif; ?>
 							</div>
 			            </div>
 			          </div>
@@ -148,12 +153,11 @@ if(Session::exists('erroresedit')){
 									    <span class="sr-only">Toggle Dropdown</span>
 									  </button>
 									  <ul class="dropdown-menu">
-									    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+									    <li><a id="<?=$cargo->id?>" href="#" data-toggle="modal" data-target="#formCargoEdit" class="editar"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
 									    <li><a href="#"><span class="glyphicon glyphicon-check"></span> Eliminar</a></li>
 									  </ul>
 									</div>
-									<?php var_dump(Auth::hasPermission('admin'));?>
-									<button type="button" class="btn btn-<?=(Auth::hasPermission('admin'))?'success':'danger'?>"><span class="glyphicon glyphicon-book"></span> Permisos</button>
+									<a href="<?=URL::to('cargos/permisos/'.$cargo->id)?>" class="btn btn-<?=(json_decode($cargo->Permisos)->admin)?'success':'danger'?>"><span class="glyphicon glyphicon-book"></span> Permisos</button>
 					                </td>
 					            </tr>
 					        	<?php endforeach; ?>
@@ -169,7 +173,6 @@ if(Session::exists('erroresedit')){
 			</div>
 		</row>
 	</div>
-	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
 	<script>
@@ -183,8 +186,8 @@ if(Session::exists('erroresedit')){
 				id:$(this).attr('id')
 			},
 			success: function(response){
-				$('#formConsultorioEdit [name=NombreCargo]').val(response.Nombre);
-				$('#formConsultorioEdit [name=id]').val(response.id);
+				$('#formCargoEdit [name=NombreCargo]').val(response.Nombre);
+				$('#formCargoEdit [name=id]').val(response.id);
 			},
 			error: function(){
 				console.log('Fracaso');

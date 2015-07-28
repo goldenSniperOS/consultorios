@@ -35,16 +35,29 @@
 			echo json_encode($cargo);
 		}
 
-		public function test(){
-			//$cargos = DB::getInstance()->query('SELECT * FROM cargo WHERE Activo = "SI"')->results();
-			$cargos = DB::getInstance()->table('cargo')
-											->where('Activo','SI')
-											->orWhere()
-											->join('usuarios','usuario.id','=','cargo.id')
-											->exec();
-			echo '<pre>';
-			var_dump($cargos);
-			echo '</pre>';
+		public function permisos($cargoIndex){
+			$cargo = Cargo::find($cargoIndex);
+			View::render('permisos',['cargo'=>$cargo]);
+		}
+
+		public function habilitarpermiso($permiso,$cargoIndex){
+			$cargo = Cargo::find($cargoIndex);
+			$cargo->Permisos = json_decode($cargo->Permisos);
+			$cargo->Permisos->{$permiso} = true;
+			Cargo::update([
+				'Permisos' => $cargo->Permisos = json_encode($cargo->Permisos)
+			],$cargoIndex);
+			View::render('permisos',['cargo'=>$cargo]);
+		}
+
+		public function inhabilitarpermiso($permiso,$cargoIndex){
+			$cargo = Cargo::find($cargoIndex);
+			$cargo->Permisos = json_decode($cargo->Permisos);
+			$cargo->Permisos->{$permiso} = false;
+			Cargo::update([
+				'Permisos' => $cargo->Permisos = json_encode($cargo->Permisos)
+			],$cargoIndex);
+			View::render('permisos',['cargo'=>$cargo]);
 		}
 
 		public function editarcargo(){
@@ -52,7 +65,7 @@
             $validation = $validate->check($_POST,[
                 'NombreCargo' => [
                     'required' => true,
-                    'min' => 10,
+                    'min' => 5,
                     'max' => 50
                 ]
             ]);
