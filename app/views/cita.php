@@ -79,13 +79,21 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Paciente">Paciente</label>
+								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
+<<<<<<< HEAD
 								<?php if($pacientes): ?>
 								<?php foreach ($pacientes as $paciente):?>
 									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
 								<?php endforeach; ?>
 								<?php endif; ?>
+=======
+								<?php foreach ($pacientes as $paciente): ?>Paciente
+									<option value="<?=$paciente->id?>"><?=$paciente->Documento?> - <?=$paciente->Nombre?></option>			
+								<?php endforeach; ?>
+>>>>>>> origin/master
 								</select>
+								<?php endif; ?>
 							</div>
 			            </div>
 			            <div class="col-md-6">
@@ -130,13 +138,13 @@ if(Session::exists('erroresedit')){
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-
-			<div class="modal fade" id="formConsultaedit" role="dialog" aria-labelledby="gridSystemModalLabel">
+			<!-- Editar -->
+			<div class="modal fade" id="formConsultaEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('citas/editarcita')?>" method="POST">
-			    <?php echo (isset($erroresedit['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsultaedit").modal({show:true})});</script>':''?>
-			    <?php echo (isset($erroresedit['Horario'])) ? '<script>$(document).ready(function(){$("#formConsultaedit").modal({show:true})});</script>':''?>			    
+			    <?php echo (isset($errores['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Horario'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>			    
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Cita</h4>
@@ -147,8 +155,13 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Paciente">Paciente</label>
+								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
+								<?php foreach ($pacientes as $paciente): ?>Paciente
+									<option value="<?=$paciente->id?>"><?=$paciente->Documento?> - <?=$paciente->Nombre?></option>			
+								<?php endforeach; ?>
 								</select>
+								<?php endif; ?>
 							</div>
 			            </div>
 			            <div class="col-md-6">
@@ -158,6 +171,7 @@ if(Session::exists('erroresedit')){
 								<?php if(isset($erroresedit['Fecha'])): ?>
 								<p class="help-block"><?=$erroresedit['Fecha']?></p>
                                 <?php endif; ?>
+
 							</div>
 			            </div>
 			          </div>
@@ -185,7 +199,10 @@ if(Session::exists('erroresedit')){
 			          </div>
 			        </div>
 			      </div>
-			      <div class="modal-footer">
+				      
+			        
+				      <div class="modal-footer">
+				      <input type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
@@ -215,7 +232,15 @@ if(Session::exists('erroresedit')){
 						        	<?php foreach ($citas as $cita): ?>
 						            <tr>
 						                <td><?=$cita->id?></td>
-						                <td><?=$cita->Paciente?></td>
+						                <td>
+						                	<?php 
+						                		foreach ($pacientes as $paciente) {
+						                		if ($cita->Paciente == $paciente->id) {
+						                				echo "$paciente->Nombre";
+						                			}	
+						                		}
+						                	?>
+						                </td>
 						                <td><?=$cita->Fecha?></td>
 						                <td>
 						                	<?php 
@@ -238,8 +263,8 @@ if(Session::exists('erroresedit')){
 										    <span class="sr-only">Toggle Dropdown</span>
 										  </button>
 										  <ul class="dropdown-menu">
-										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaedit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-										    <li><span class="glyphicon glyphicon-trash"></span> Eliminar</li>
+										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+										    <li><a href="<?=URL::to('citas/eliminar/'.$cita->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
 										  </ul>
 										</div>
 										</td>
@@ -276,10 +301,11 @@ if(Session::exists('erroresedit')){
 				id:$(this).attr('id')
 			},
 			success: function(response){
-				$('#formConsultaedit [name=Fecha]').val(response.Fecha);
-				$('#formConsultaedit [name=Horario]').val(response.Horario);
-				$('#formConsultaedit [name=Receta]').val(response.Observacion);
-				$('#formConsultaedit [name=id]').val(response.id);
+				$('#formConsultaEdit [name=Paciente]').val(response.Paciente);
+				$('#formConsultaEdit [name=Fecha]').val(response.Fecha);
+				$('#formConsultaEdit [name=Horario]').val(response.Horario);
+				$('#formConsultaEdit [name=Receta]').val(response.Observacion);
+				$('#formConsultaEdit [name=id]').val(response.id);
 			},
 			error: function(){
 				console.log('Fracaso');
@@ -289,7 +315,7 @@ if(Session::exists('erroresedit')){
 	$(document).ready(function(){
 		$('.eliminar').on('click',function(e){
 			e.preventDefault();
-			if(confirm('¿Desea Eliminar el Usuario?')){
+			if(confirm('¿Desea Eliminar el Cita?')){
 				window.location = $(this).attr('href');
 			}
 		});
