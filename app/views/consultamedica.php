@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Consultorio</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/jquery.dataTables.min.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
+	<?=HTML::style('css/style.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -22,7 +23,7 @@
 		</row>
 		<row>
 			<div class="col-xs-2 navegador">
-				<img src="img/user.png" alt="">
+				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
 						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
@@ -54,6 +55,7 @@
 			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
+			    <form action="<?=URL::to('consultas/registrarconsulta')?>" method="POST">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
@@ -98,6 +100,60 @@
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="button" class="btn btn-primary">Guardar</button>
 			      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="formConsultaEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    <form action="<?=URL::to('consultas/editarconsulta')?>" method="POST">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="container-fluid">
+			          <div class="row">
+			            <div class="col-md-6">
+			            	<div class="form-group">
+								<label for="Paciente">Paciente</label>
+								<select name="Paciente" id="Paciente" class="form-control">
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="Sintomas">Sintomas</label>
+								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="Diagnostico">Diagnostico</label>
+								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+							</div>
+
+			            </div>
+			            <div class="col-md-6">
+			            	<div class="form-group">
+								<label for="Tratamiento">Tratamiento</label>
+								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="Receta">Receta</label>
+								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="Observaciones">Observaciones</label>
+								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+							</div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+			      </form>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
@@ -117,11 +173,13 @@
 					            </tr>
 					        </thead>		 				 
 					        <tbody>
+					        	<?php if($consultas): ?>
+					        	<?php for ($i=1; $i <= count($consultas); $i++):?>
 					            <tr>
-					            	<th scope="row">1</th>
-					                <td><span class="glyphicon glyphicon-user"></span> Adrian Ruiz</td>
-					                <td>10/JUN/2015</td>
-					                <td>Medico Jose</td>
+					            	<th scope="row"><?=$i?></th>
+					                <td><span class="glyphicon glyphicon-user"></span> <?=$consultas[$i]->Paciente?></td>
+					                <td><?=date('d/m/Y',strtotime(str_replace('/', '.', $consultas[$i]->Fecha)))?></td>
+					                <td><?=$consultas[$i]->Medico?></td>
 					                <td>
 				                	<!-- Split button -->
 									<div class="btn-group">
@@ -138,6 +196,8 @@
 									<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-print"></span></button>
 					                </td>
 					            </tr>
+					            <?php endfor; ?>
+					        	<?php endif; ?>
 					        </tbody>
 					    </table>
 						  </div>
@@ -149,8 +209,7 @@
 			</div>
 		</row>
 	</div>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<?=HTML::script('js/jquery.dataTables.min.js')?>
+	<?=HTML::script('js/bootstrap.min.js')?>
 </body>
 </html>

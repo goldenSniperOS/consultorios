@@ -14,6 +14,7 @@ if(Session::exists('erroresedit')){
 	<title>Administrador | Consultorio</title>
 	<?=HTML::style('css/bootstrap.min.css')?>
 	<?=HTML::style('css/style.css')?>
+	<?=HTML::style('css/bootstrap-datepicker3.min.css')?>s
 	<?=HTML::script('js/jquery-1.11.3.min.js')?>s
 </head>
 <body>
@@ -56,9 +57,11 @@ if(Session::exists('erroresedit')){
 					CITAS MEDICAS
 				</h3>
 			</div>
+			<?php if($pacientes): ?>
 			<div class="pull-right">
 				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formConsulta">+</a>
 			</div>
+			<?php endif; ?>
 			<!-- Modal -->
 			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
@@ -77,13 +80,18 @@ if(Session::exists('erroresedit')){
 			            	<div class="form-group">
 								<label for="Paciente">Paciente</label>
 								<select name="Paciente" id="Paciente" class="form-control">
+								<?php if($pacientes): ?>
+								<?php foreach ($pacientes as $paciente):?>
+									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
+								<?php endforeach; ?>
+								<?php endif; ?>
 								</select>
 							</div>
 			            </div>
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control" id="Fecha" name="Fecha" placeholder="Ingrese su Fecha AAAA/MM/DD">
+								<input type="text" class="form-control datepicker" id="Fecha" name="Fecha" value="<?=date('d/m/Y',time())?>" placeholder="Ingrese su Fecha DD/MM/AAAA">
 								<?php if(isset($errores['Fecha'])): ?>
 								<p class="help-block"><?=$errores['Fecha']?></p>
                                 <?php endif; ?>
@@ -189,7 +197,7 @@ if(Session::exists('erroresedit')){
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="list-group">
-					  <li class="list-group-item active">ULTIMAS CONSULTAS</li>
+					  <li class="list-group-item active">ULTIMAS CITAS</li>
 					  <li class="list-group-item">
 					    <table class="table table-striped table-bordered">
 					        <thead>
@@ -250,7 +258,14 @@ if(Session::exists('erroresedit')){
 		</row>
 	</div>
 	<?=HTML::script('js/bootstrap.min.js')?>
+	<?=HTML::script('js/bootstrap-datepicker.min.js')?>
 	<script>
+
+	$('.datepicker').datepicker({
+	    startDate: "today",
+    	autoclose: true
+	});
+
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({

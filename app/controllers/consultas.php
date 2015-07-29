@@ -1,5 +1,5 @@
-<?php
-	class Citas
+<?php 
+	class Consultas
 	{
 		public function __construct(){
 			if(!Auth::isLoggedIn()){
@@ -8,12 +8,11 @@
 		}
 		
 		public function index(){
-			$citas = Cita::all();
-			$pacientes = Paciente::all();
-			View::render('cita',['citas' => $citas,'pacientes' => $pacientes]);
+			$consultas = Consulta::all();
+			View::render('consultamedica',['consultas'=>$consultas]);
 		}
 
-		public function registrarcita(){
+		public function registrarconsulta(){
 			if(Input::exists()){
 				$validate = new Validate();
 	            $validation = $validate->check($_POST,[
@@ -26,7 +25,7 @@
                 ]);
                 if($validation->passed()){
                 	/*Insercion de un Usuario*/
-					Cita::create([
+					Consulta::create([
 						'Paciente' =>  Input::get('Paciente'),
 						'Fecha' => Input::get('Fecha'),
 						'Horario' => Input::get('Horario') ,

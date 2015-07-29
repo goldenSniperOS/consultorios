@@ -373,8 +373,6 @@ if(Session::exists('erroresedit')){
 			</div>
 		</row>
 	</div>
-
-	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
 	<script>
