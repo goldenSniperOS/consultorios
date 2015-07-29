@@ -1,9 +1,22 @@
 <?php
 	class Usuarios
 	{
+		public function __construct(){
+			if(!Auth::isLoggedIn()){
+				Redirect::to('home/index');
+			}
+		}
+		
 		public function index(){
-			$usuarios = Usuario::all();
-			$consultorios = Consultorio::all();
+			$usuarios = DB::getInstance()->table('usuario')
+										->select('usuario.Documento',
+												'usuario.NombreCompleto',
+												'cargo.Nombre as Cargo',
+												'usuario.Activo')
+										->join('cargo','cargo.id','=','usuario.Cargo')
+										->exec();
+										
+			$consultorios = DB::getInstance()->table('consultorio')->where('Activo','SI')->exec();
 			$cargos = Cargo::all();
 			View::render('usuario',['usuarios' => $usuarios,'consultorios' => $consultorios,'cargos'=> $cargos]);
 		}
@@ -39,7 +52,7 @@
 						'Cargo' => Input::get('Cargo') ,
 						'NombreCompleto' => Input::get('Nombre'),
 						'Consultorio' => Input::get('Consultorio'),
-						'Contrasena' => Input::get('Contrasena')
+						'Contrasena' => Hash::make(Input::get('Contrasena'))
 					]);
 				}else{
 					Session::flash('errores',$validation->errors());
@@ -83,7 +96,7 @@
 					'Cargo' => Input::get('Cargo') ,
 					'NombreCompleto' => Input::get('Nombre'),
 					'Consultorio' => Input::get('Consultorio'),
-					'Contrasena' => Input::get('Contrasena')
+					'Contrasena' => Hash::make(Input::get('Contrasena'))
 				],Input::get('id'));
 			}else{
 				Session::flash('erroresedit',$validation->errors());

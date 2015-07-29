@@ -1,18 +1,9 @@
-.outer {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.middle {
-    display: table-cell;
-    vertical-align: middle;
-}
-
 .login{
-	display: inline;
-    position: relative;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	width: 500px;
+	height: 500px;
 }
 
 .login img{

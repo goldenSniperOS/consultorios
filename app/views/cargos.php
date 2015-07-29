@@ -25,7 +25,7 @@ if(Session::exists('erroresedit')){
 			<div class="col-xs-10 topbar">
 				<div class="pull-right">
 					<span>Fecha:<?=date('d/M/Y',time())?></span>
-					<a href="#" class="btn btn-lg btn-danger">Salir</a>
+					<a href="<?=URL::to('admin/logout')?>" class="btn btn-lg btn-danger">Salir</a>
 				</div>	
 			</div>
 			</div>

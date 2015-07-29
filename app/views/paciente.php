@@ -25,7 +25,7 @@ if(Session::exists('erroresedit')){
 			<div class="col-xs-10 topbar">
 				<div class="pull-right">
 					<span>Fecha:<?=date('d/M/Y',time())?></span>
-					<a href="#" class="btn btn-lg btn-danger">Salir</a>
+					<a href="<?=URL::to('admin/logout')?>" class="btn btn-lg btn-danger">Salir</a>
 				</div>	
 			</div>
 			</div>
@@ -422,7 +422,7 @@ if(Session::exists('erroresedit')){
 	</script>
 	<?php 
 		$datos=json_encode($distritos)
-	 ?>
+	?>
 	<script>
 		$(document).ready(function(){
 			$("#Departamento").change(function(){
@@ -450,11 +450,8 @@ if(Session::exists('erroresedit')){
 
 				var Distritos = eval(<?php echo $datos;?>);	
 				$("#MunicipioEdit").empty();
-
-
 				$.each(Distritos, function (i, Distrito) {
 					if(Distrito.idDepa==valor){
-
 						$('#MunicipioEdit').append($('<option>', { 
 				        value: Distrito.idDist,
 				        text : Distrito.distrito 
@@ -466,11 +463,6 @@ if(Session::exists('erroresedit')){
 
 			});
 		});
-
-
-
 	</script>
-
-	
 </body>
 </html>

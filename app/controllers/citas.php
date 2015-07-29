@@ -1,6 +1,12 @@
 <?php
 	class Citas
 	{
+		public function __construct(){
+			if(!Auth::isLoggedIn()){
+				Redirect::to('home/index');
+			}
+		}
+		
 		public function index(){
 			$citas = Cita::all();
 			View::render('cita',['citas' => $citas]);

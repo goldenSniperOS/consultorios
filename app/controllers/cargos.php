@@ -1,6 +1,12 @@
 <?php
 	class Cargos
 	{
+		public function __construct(){
+			if(!Auth::isLoggedIn()){
+				Redirect::to('home/index');
+			}
+		}
+
 		public function index(){
 			$cargos = Cargo::all();
 			View::render('cargos',['cargos' => $cargos]);

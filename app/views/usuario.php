@@ -15,6 +15,7 @@ if(Session::exists('erroresedit')){
 	<?=HTML::style('css/bootstrap.min.css')?>
 	<?=HTML::style('css/style.css')?>
 	<?=HTML::script('js/jquery-1.11.3.min.js')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -24,7 +25,7 @@ if(Session::exists('erroresedit')){
 			<div class="col-xs-10 topbar">
 				<div class="pull-right">
 					<span>Fecha:<?=date('d/M/Y',time())?></span>
-					<a href="#" class="btn btn-lg btn-danger">Salir</a>
+					<a href="<?=URL::to('admin/logout')?>" class="btn btn-lg btn-danger">Salir</a>
 				</div>	
 			</div>
 			</div>
@@ -56,7 +57,7 @@ if(Session::exists('erroresedit')){
 						USUARIOS
 					</h3>
 				</div>
-			<?php if($cargos && $consultorio): ?>
+			<?php if($cargos && $consultorios): ?>
 			<div class="pull-right">
 				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formPaciente">+</a>
 			</div>
@@ -261,13 +262,7 @@ if(Session::exists('erroresedit')){
 						            <tr>
 						                <td><?=$usuario->Documento?></td>
 						                <td><?=$usuario->NombreCompleto?></td>
-						                <td>
-												<?php foreach ($cargos as $cargo): ?>
-													<?php if ($usuario->Cargo == $cargo->id): ?>
-														<?=$cargo->Nombre?>
-													<?php endif ?>		
-												<?php endforeach; ?>
-						                </td>
+						                <td><?=$usuario->Cargo?></td>
 						                <td><?=($usuario->Activo == 'SI')?'<p class="label label-success">Activo</p>':'<p class="label label-danger">Inactivo</p>'?></td>
 						                <td>
 					                	<!-- Split button -->
@@ -299,9 +294,9 @@ if(Session::exists('erroresedit')){
 			</div>
 		</row>
 	</div>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
+	<?=HTML::script('js/jquery.dataTables.min.js')?>
+	<?=HTML::script('js/bootstrap.min.js')?>
 	<script>
 		$(document).ready(function(){
 		    $('#example').DataTable();

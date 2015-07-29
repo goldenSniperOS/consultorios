@@ -1,13 +1,19 @@
 <?php 
 	class Pacientes{
-		public function index(){
-				$pacientes = Paciente::all();
-				$departamentos = Departamento::all();
-				$distritos = DB::getInstance()->table('provincia')
-										 ->join('distrito','distrito.idProv','=','provincia.idProv')
-										 ->exec();
-				View::render('paciente',['pacientes' => $pacientes,'departamentos' => $departamentos,'distritos' => $distritos]);
-			}
+		public function __construct(){
+            if(!Auth::isLoggedIn()){
+                Redirect::to('home/index');
+            }
+        }
+        
+        public function index(){
+			$pacientes = Paciente::all();
+			$departamentos = Departamento::all();
+			$distritos = DB::getInstance()->table('provincia')
+									 ->join('distrito','distrito.idProv','=','provincia.idProv')
+									 ->exec();
+			View::render('paciente',['pacientes' => $pacientes,'departamentos' => $departamentos,'distritos' => $distritos]);
+		}
 		public function registrarpaciente(){
 			if(Input::exists()){
 				$validate = new Validate();

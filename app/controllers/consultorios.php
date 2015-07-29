@@ -1,10 +1,16 @@
 <?php
 	class Consultorios
 	{
-			public function index(){
-				$consultorios = Consultorio::all();
-				View::render('consultorio',['consultorios' => $consultorios]);
+		public function __construct(){
+			if(!Auth::isLoggedIn()){
+				Redirect::to('home/index');
 			}
+		}
+		
+		public function index(){
+			$consultorios = Consultorio::all();
+			View::render('consultorio',['consultorios' => $consultorios]);
+		}
 
 		public function registrarconsultorio(){
 			if(Input::exists()){
