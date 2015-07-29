@@ -154,7 +154,7 @@ if(Session::exists('erroresedit')){
 									  </button>
 									  <ul class="dropdown-menu">
 									    <li><a id="<?=$cargo->id?>" href="#" data-toggle="modal" data-target="#formCargoEdit" class="editar"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-check"></span> Eliminar</a></li>
+									    <li><a href="<?=URL::to('cargos/eliminar/'.$cargo->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
 									  </ul>
 									</div>
 									<a href="<?=URL::to('cargos/permisos/'.$cargo->id)?>" class="btn btn-<?=(json_decode($cargo->Permisos)->admin)?'success':'danger'?>"><span class="glyphicon glyphicon-book"></span> Permisos</button>
@@ -197,7 +197,7 @@ if(Session::exists('erroresedit')){
 	$(document).ready(function(){
 		$('.eliminar').on('click',function(e){
 			e.preventDefault();
-			if(confirm('¿Desea Eliminar el Consultorio?')){
+			if(confirm('¿Desea Eliminar el Cargo?')){
 				window.location = $(this).attr('href');
 			}
 		});

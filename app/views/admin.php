@@ -61,21 +61,15 @@
 						        </tr>
 						      </thead>
 						      <tbody>
+						      	<?php if($pacientes): ?>
+						        <?php for ($i=1;$i<=count($pacientes);$i++): ?>
 						        <tr>
-						          <th scope="row">1</th>
-						          <td><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td>235-45621</td>
+						          <th scope="row"><?=$i?></th>
+						          <td><span class="glyphicon glyphicon-user"></span> <?=$pacientes[$i-1]->Nombre?></td>
+						          <td><?=$pacientes[$i-1]->Telefono?></td>
 						        </tr>
-						        <tr>
-						          <th scope="row">2</th>
-						          <td><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td>235-45621</td>
-						        </tr>
-						        <tr>
-						          <th scope="row">3</th>
-						          <td><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td>235-45621</td>
-						        </tr>				        
+						    	<?php endfor; ?>
+						    	<?php endif; ?>	        
 						      </tbody>
 						    </table>
 						  </div>

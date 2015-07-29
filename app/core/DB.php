@@ -13,7 +13,8 @@ class DB{
 		'join' => '',
 		'where' => '',
 		'group' => '',
-		'order' => ''
+		'order' => '',
+		'limit' => ''
 	];
 
 	private function __construct(){
@@ -87,6 +88,8 @@ class DB{
 		}
 	}
 
+
+
 	public function orWhere(){
 		if(func_num_args() > 0);{
 			if(func_num_args() == 2){
@@ -157,6 +160,15 @@ class DB{
 		}else{
 			$this->sqlFinal['order'] = 'ORDER BY '.$field;
 		}
+		return $this;
+	}
+
+	public function limit($param1,$param2 = null){
+		$this->sqlFinal['limit'] = 'LIMIT '.$param1;
+		if($param2){
+			$this->sqlFinal['limit']+=','.$param2;
+		}
+		return $this;
 	}
 
 	public function exec(){

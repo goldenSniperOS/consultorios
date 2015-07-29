@@ -6,7 +6,6 @@ if(Session::exists('errores')){
 if(Session::exists('erroresedit')){
 	$erroresedit = Session::flash('erroresedit');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -341,7 +340,7 @@ if(Session::exists('erroresedit')){
 						        </thead>		 				 
 						        <tbody>
 						        	<?php if($pacientes): ?>
-						        		<?php foreach ($pacientes as $paciente): ?>
+						        	<?php foreach ($pacientes as $paciente): ?>
 						            <tr>
 						                <td><span class="glyphicon glyphicon-user"></span> <?=$paciente->Nombre?></td>
 						                <td><?=$paciente->Direccion?></td>
@@ -370,7 +369,6 @@ if(Session::exists('erroresedit')){
 					  </li>
 					</ul>
 				</div>
-					
 			</div>
 			</div>
 		</row>

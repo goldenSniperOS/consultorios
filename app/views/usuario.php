@@ -56,9 +56,11 @@ if(Session::exists('erroresedit')){
 						USUARIOS
 					</h3>
 				</div>
+			<?php if($cargos && $consultorio): ?>
 			<div class="pull-right">
 				<a href="#" class="btn btn-success nuevo"data-toggle="modal" data-target="#formPaciente">+</a>
 			</div>
+			<?php endif; ?>
 			<!-- Modal -->
 			<div class="modal fade" id="formPaciente" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
@@ -69,7 +71,6 @@ if(Session::exists('erroresedit')){
 			    <?php echo (isset($errores['Consultorio'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 			    <?php echo (isset($errores['Cargo'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
 			    <?php echo (isset($errores['Contrasena'])) ? '<script>$(document).ready(function(){$("#formPaciente").modal({show:true})});</script>':''?>
-
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nuevo Usuario</h4>
