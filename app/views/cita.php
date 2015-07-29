@@ -81,17 +81,11 @@ if(Session::exists('erroresedit')){
 								<label for="Paciente">Paciente</label>
 								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
-<<<<<<< HEAD
 								<?php if($pacientes): ?>
 								<?php foreach ($pacientes as $paciente):?>
 									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
 								<?php endforeach; ?>
 								<?php endif; ?>
-=======
-								<?php foreach ($pacientes as $paciente): ?>Paciente
-									<option value="<?=$paciente->id?>"><?=$paciente->Documento?> - <?=$paciente->Nombre?></option>			
-								<?php endforeach; ?>
->>>>>>> origin/master
 								</select>
 								<?php endif; ?>
 							</div>
@@ -190,7 +184,6 @@ if(Session::exists('erroresedit')){
 							</div>
 			            </div>
 			            <div class="col-md-6">
-			            	
 							<div class="form-group">
 								<label for="Receta">Observaciones</label>
 								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
@@ -198,9 +191,7 @@ if(Session::exists('erroresedit')){
 			            </div>
 			          </div>
 			        </div>
-			      </div>
-				      
-			        
+			      </div>        
 				      <div class="modal-footer">
 				      <input type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

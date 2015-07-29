@@ -10,11 +10,8 @@
 		public function index(){
 			$citas = Cita::all();
 			$pacientes = Paciente::all();
-<<<<<<< HEAD
+
 			View::render('cita',['citas' => $citas,'pacientes' => $pacientes]);
-=======
-			View::render('cita',['citas' => $citas, 'pacientes' => $pacientes]);
->>>>>>> origin/master
 		}
 
 		public function registrarcita(){
