@@ -14,8 +14,8 @@ if(Session::exists('erroresedit')){
 	<title>Administrador | Consultorio</title>
 	<?=HTML::style('css/bootstrap.min.css')?>
 	<?=HTML::style('css/style.css')?>
-	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 	<?=HTML::style('css/jquery.dataTables.min.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -294,16 +294,13 @@ if(Session::exists('erroresedit')){
 			</div>
 		</row>
 	</div>
-	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
 	<script>
 		$(document).ready(function(){
 		    $('#example').DataTable();
 		});
-	</script>
-	<?=HTML::script('js/bootstrap.min.js')?>
-	<script>
+
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({
