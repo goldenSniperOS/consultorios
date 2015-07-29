@@ -9,7 +9,8 @@
 		
 		public function index(){
 			$citas = Cita::all();
-			View::render('cita',['citas' => $citas]);
+			$pacientes = Paciente::all();
+			View::render('cita',['citas' => $citas, 'pacientes' => $pacientes]);
 		}
 
 		public function registrarcita(){
@@ -26,7 +27,7 @@
                 if($validation->passed()){
                 	/*Insercion de un Usuario*/
 					Cita::create([
-						'Paciente' =>  null,
+						'Paciente' =>  Input::get('Paciente'),
 						'Fecha' => Input::get('Fecha'),
 						'Horario' => Input::get('Horario') ,
 						'Observacion' => Input::get('Receta')						
@@ -40,7 +41,7 @@
 
 		public function editarcitaajax(){
 			$id = Input::get('id');
-			$citas = Usuario::find($id);
+			$citas = Cita::find($id);
 			echo json_encode($cita);
 		}
 
@@ -56,7 +57,7 @@
                 ]);   
                 if($validation->passed()){
 				Cita::update([
-					'Paciente' =>  null,
+					'Paciente' =>  Input::get('Paciente'),
 					'Fecha' => Input::get('Fecha'),
 					'Horario' => Input::get('Horario') ,
 					'Observacion' => Input::get('Receta')
