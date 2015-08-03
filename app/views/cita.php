@@ -137,8 +137,8 @@ if(Session::exists('erroresedit')){
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('citas/editarcita')?>" method="POST">
-			    <?php echo (isset($errores['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
-			    <?php echo (isset($errores['Horario'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>			    
+			    <?php echo (isset($erroresedit['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Horario'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>			    
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Cita</h4>

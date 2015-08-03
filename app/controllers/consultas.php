@@ -14,6 +14,27 @@
 		}
 
 		public function registrarconsulta(){
+			if(Input::exists()){
+				$validate = new Validate();
+	            $validation = $validate->check($_POST,[
+                    'Sintomas' => [
+                        'required' => true
+                    ],
+                    'Diagnostico' => [
+                        'required' => true
+                    ],
+                    'Receta' => [
+                        'required' => true
+                    ],
+                    'Observaciones' => [
+                        'required' => true
+                    ],
+                    'Tratamiento' => [
+                        'required' => true
+                    ]
+                ]);
+                if($validation->passed()){
+                	/*Insercion de un Usuario*/
 					Consulta::create([
 						'Paciente' =>  Input::get('Paciente'),
 						'Sintomas' => Input::get('Sintomas'),
@@ -24,40 +45,55 @@
 						'Medico' => Auth::get('id'),
 						'Fecha'	=> date('d/M/Y',time())			
 					]);
-			Redirect::to('consultamedica/index');
+				}else{
+					Session::flash('errores',$validation->errors());
+				}
+			}					
+			Redirect::to('consultas/index');
 		}
 
-		public function editarcitaajax(){
+		public function editarconsutaajax(){
 			$id = Input::get('id');
-			$citas = Usuario::find($id);
+			$citas = Consulta::find($id);
 			echo json_encode($cita);
 		}
 
-		public function editarcita(){
+		public function editarconsulta(){
 			$validate = new Validate();
 	            $validation = $validate->check($_POST,[
-                    'Fecha' => [
+                    'Sintomas' => [
                         'required' => true
                     ],
-                    'Horario' => [
-                    	'required' => true
+                    'Diagnostico' => [
+                        'required' => true
+                    ],
+                    'Receta' => [
+                        'required' => true
+                    ],
+                    'Observaciones' => [
+                        'required' => true
+                    ],
+                    'Tratamiento' => [
+                        'required' => true
                     ]
-                ]);   
+                ]); 
                 if($validation->passed()){
-				Cita::update([
-					'Paciente' =>  null,
-					'Fecha' => Input::get('Fecha'),
-					'Horario' => Input::get('Horario') ,
-					'Observacion' => Input::get('Receta')
+				Consulta::update([
+					'Paciente' =>  Input::get('Paciente'),
+					'Sintomas' => Input::get('Sintomas'),
+					'Diagnostico' => Input::get('Diagnostico') ,
+					'Receta' => Input::get('Receta') ,
+					'Observacion' => Input::get('Observaciones') ,
+					'Tratamiento' => Input::get('Tratamiento')
 				],Input::get('id'));
 			}else{
 				Session::flash('erroresedit',$validation->errors());
 			}
-			Redirect::to('citas/index');
+			Redirect::to('consultas/index');
 		}
 
 		public function eliminar($param){
-			DB::getInstance()->delete('cita',[['id','=',$param]]);
-			Redirect::to('citas/index');
+			DB::getInstance()->delete('consulta',[['id','=',$param]]);
+			Redirect::to('consultas/index');
 		}
 	}

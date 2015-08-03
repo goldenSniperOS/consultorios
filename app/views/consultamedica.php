@@ -1,3 +1,12 @@
+<?php
+if(Session::exists('errores')){
+	$errores = Session::flash('errores');
+}
+
+if(Session::exists('erroresedit')){
+	$erroresedit = Session::flash('erroresedit');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +65,11 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('consultas/registrarconsulta')?>" method="POST">
+			    <?php echo (isset($errores['Sintomas'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Diagnostico'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Receta'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Observaciones'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Tratamiento'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
@@ -76,28 +90,43 @@
 								</select>
 								<?php endif; ?>
 							</div>
-							<div class="form-group">
-								<label for="Sintomas">Sintomas</label>
+							<div class="form-group <?=(isset($errores['Sintomas']))?'has-error':''?>">
+								<label for="Sintomas ">Sintomas</label>
 								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+								<?php if(isset($errores['Sintomas'])): ?>
+								<p class="help-block"><?=$errores['Sintomas']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($errores['Diagnostico']))?'has-error':''?>">
 								<label for="Diagnostico">Diagnostico</label>
 								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+								<?php if(isset($errores['Diagnostico'])): ?>
+								<p class="help-block"><?=$errores['Diagnostico']?></p>
+                                <?php endif; ?>
 							</div>
 
 			            </div>
 			            <div class="col-md-6">
-			            	<div class="form-group">
+			            	<div class="form-group <?=(isset($errores['Tratamiento']))?'has-error':''?>">
 								<label for="Tratamiento">Tratamiento</label>
 								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+								<?php if(isset($errores['Tratamiento'])): ?>
+								<p class="help-block"><?=$errores['Tratamiento']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($errores['Receta']))?'has-error':''?>">
 								<label for="Receta">Receta</label>
 								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<?php if(isset($errores['Receta'])): ?>
+								<p class="help-block"><?=$errores['Receta']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($errores['Observaciones']))?'has-error':''?>">
 								<label for="Observaciones">Observaciones</label>
 								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+								<?php if(isset($errores['Observaciones'])): ?>
+								<p class="help-block"><?=$errores['Observaciones']?></p>
+                                <?php endif; ?>
 							</div>
 			            </div>
 			          </div>
@@ -116,9 +145,14 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('consultas/editarconsulta')?>" method="POST">
+			    <?php echo (isset($erroresedit['Sintomas'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Diagnostico'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Receta'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Observaciones'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Tratamiento'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Nueva Consulta</h4>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Consulta</h4>
 			      </div>
 			      <div class="modal-body">
 			        <div class="container-fluid">
@@ -126,37 +160,60 @@
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Paciente">Paciente</label>
+								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
+								<?php if($pacientes): ?>
+								<?php foreach ($pacientes as $paciente):?>
+									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
+								<?php endforeach; ?>
+								<?php endif; ?>
 								</select>
+								<?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($erroresedit['Sintomas']))?'has-error':''?>">
 								<label for="Sintomas">Sintomas</label>
 								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+								<?php if(isset($erroresedit['Sintomas'])): ?>
+								<p class="help-block"><?=$erroresedit['Sintomas']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($erroresedit['Diagnostico']))?'has-error':''?>">
 								<label for="Diagnostico">Diagnostico</label>
 								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+								<?php if(isset($erroresedit['Diagnostico'])): ?>
+								<p class="help-block"><?=$erroresedit['Diagnostico']?></p>
+                                <?php endif; ?>
 							</div>
 
 			            </div>
 			            <div class="col-md-6">
-			            	<div class="form-group">
+			            	<div class="form-group  <?=(isset($erroresedit['Tratamiento']))?'has-error':''?>">
 								<label for="Tratamiento">Tratamiento</label>
 								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+								<?php if(isset($erroresedit['Tratamiento'])): ?>
+								<p class="help-block"><?=$erroresedit['Tratamiento']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($erroresedit['Receta']))?'has-error':''?>">
 								<label for="Receta">Receta</label>
 								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<?php if(isset($erroresedit['Receta'])): ?>
+								<p class="help-block"><?=$erroresedit['Receta']?></p>
+                                <?php endif; ?>
 							</div>
-							<div class="form-group">
+							<div class="form-group <?=(isset($erroresedit['Observaciones']))?'has-error':''?>">
 								<label for="Observaciones">Observaciones</label>
 								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+								<?php if(isset($erroresedit['Observaciones'])): ?>
+								<p class="help-block"><?=$erroresedit['Observaciones']?></p>
+                                <?php endif; ?>
 							</div>
 			            </div>
 			          </div>
 			        </div>
 			      </div>
 			      <div class="modal-footer">
+			      	<input type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
@@ -196,7 +253,7 @@
 						                </td>
 						                <td><?=$consulta->Fecha?></td>
 						                <td>
-						                	Medico
+						                	<?=Auth::get('NombreCompleto')?>
 						                </td>
 						                <td><?=$consulta->Diagnostico?></td>
 						                <td>
@@ -208,8 +265,8 @@
 										    <span class="sr-only">Toggle Dropdown</span>
 										  </button>
 										  <ul class="dropdown-menu">
-										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-										    <li><a href="<?=URL::to('citas/eliminar/'.$cita->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
+										  	<li><a id="<?=$consulta->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+										    <li><a href="<?=URL::to('consultas/eliminar/'.$consulta->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
 										  </ul>
 										</div>
 										</td>
@@ -229,5 +286,45 @@
 	</div>
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
+	<script>
+	$('.datepicker').datepicker({
+	    startDate: "today",
+    	autoclose: true
+	});
+
+	$(document).ready(function(){
+		    $('#example').DataTable();
+		});
+
+	$('.editar').on('click',function(e){
+		e.preventDefault();
+		$.ajax({
+			method:'post',
+			url:'<?=URL::to("citas/editarconsutaajax")?>',
+			dataType:'json',
+			data:{
+				id:$(this).attr('id')
+			},
+			success: function(response){
+				$('#formConsultaEdit [name=Paciente]').val(response.Paciente);
+				$('#formConsultaEdit [name=Sintomas]').val(response.Sintomas);
+				$('#formConsultaEdit [name=Diagnostico]').val(response.Diagnostico);
+				$('#formConsultaEdit [name=Receta]').val(response.Receta);
+				$('#formConsultaEdit [name=Observaciones]').val(response.Observacion);
+				$('#formConsultaEdit [name=Tratamiento]').val(response.Tratamiento);
+			},
+			error: function(){
+				console.log('Fracaso');
+			}
+		})
+	});
+	$(document).ready(function(){
+		$('.eliminar').on('click',function(e){
+			e.preventDefault();
+			if(confirm('¿Desea Eliminar el Consulta?')){
+				window.location = $(this).attr('href');
+			}
+		});
+	});
 </body>
 </html>
