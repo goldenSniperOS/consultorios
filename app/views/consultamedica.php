@@ -176,18 +176,19 @@
 					                <th>PACIENTE</th>
 					                <th>FECHA</th>
 					                <th>MEDICO</th>
+					                <th>DIAGNOSTICO</th>
 					                <th>OPERACIONES</th>
 					            </tr>
 					        </thead>		 				 
 					        <tbody>
 					        	<?php if($consultas): ?>
-						        	<?php foreach ($consultas as $consutla): ?>
+						        	<?php foreach ($consultas as $consulta): ?>
 						            <tr>
 						                <td><?=$consulta->id?></td>
 						                <td>
 						                	<?php 
 						                		foreach ($pacientes as $paciente) {
-						                		if ($consutla->Paciente == $paciente->id) {
+						                		if ($consulta->Paciente == $paciente->id) {
 						                				echo "$paciente->Nombre";
 						                			}	
 						                		}
@@ -197,7 +198,7 @@
 						                <td>
 						                	Medico
 						                </td>
-						                <td><?=$cita->Observacion?></td>
+						                <td><?=$consulta->Diagnostico?></td>
 						                <td>
 					                	<!-- Split button -->
 										<div class="btn-group">
