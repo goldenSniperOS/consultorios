@@ -9,33 +9,22 @@
 		
 		public function index(){
 			$consultas = Consulta::all();
-			View::render('consultamedica',['consultas'=>$consultas]);
+			$pacientes = Paciente::all();
+			View::render('consultamedica',['consultas'=>$consultas,'pacientes' => $pacientes]);
 		}
 
 		public function registrarconsulta(){
-			if(Input::exists()){
-				$validate = new Validate();
-	            $validation = $validate->check($_POST,[
-                    'Fecha' => [
-                        'required' => true
-                    ],
-                    'Horario' => [
-                    	'required' => true
-                    ]
-                ]);
-                if($validation->passed()){
-                	/*Insercion de un Usuario*/
 					Consulta::create([
 						'Paciente' =>  Input::get('Paciente'),
-						'Fecha' => Input::get('Fecha'),
-						'Horario' => Input::get('Horario') ,
-						'Observacion' => Input::get('Receta')						
+						'Sintomas' => Input::get('Sintomas'),
+						'Diagnostico' => Input::get('Diagnostico') ,
+						'Receta' => Input::get('Receta') ,
+						'Observacion' => Input::get('Observaciones') ,
+						'Tratamiento' => Input::get('Tratamiento'),
+						'Medico' => Auth::get('id'),
+						'Fecha'	=> date('d/M/Y',time())			
 					]);
-				}else{
-					Session::flash('errores',$validation->errors());
-				}
-			}
-			Redirect::to('citas/index');
+			Redirect::to('consultamedica/index');
 		}
 
 		public function editarcitaajax(){

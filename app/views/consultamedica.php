@@ -66,8 +66,15 @@
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Paciente">Paciente</label>
+								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
+								<?php if($pacientes): ?>
+								<?php foreach ($pacientes as $paciente):?>
+									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
+								<?php endforeach; ?>
+								<?php endif; ?>
 								</select>
+								<?php endif; ?>
 							</div>
 							<div class="form-group">
 								<label for="Sintomas">Sintomas</label>
@@ -98,7 +105,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Guardar</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
 			      </form>
 			    </div><!-- /.modal-content -->
@@ -174,30 +181,40 @@
 					        </thead>		 				 
 					        <tbody>
 					        	<?php if($consultas): ?>
-					        	<?php for ($i=1; $i <= count($consultas); $i++):?>
-					            <tr>
-					            	<th scope="row"><?=$i?></th>
-					                <td><span class="glyphicon glyphicon-user"></span> <?=$consultas[$i]->Paciente?></td>
-					                <td><?=date('d/m/Y',strtotime(str_replace('/', '.', $consultas[$i]->Fecha)))?></td>
-					                <td><?=$consultas[$i]->Medico?></td>
-					                <td>
-				                	<!-- Split button -->
-									<div class="btn-group">
-									  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></button>
-									  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    <span class="caret"></span>
-									    <span class="sr-only">Toggle Dropdown</span>
-									  </button>
-									  <ul class="dropdown-menu">
-									    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
-									    <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
-									  </ul>
-									</div>
-									<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-print"></span></button>
-					                </td>
-					            </tr>
-					            <?php endfor; ?>
-					        	<?php endif; ?>
+						        	<?php foreach ($consultas as $consutla): ?>
+						            <tr>
+						                <td><?=$consulta->id?></td>
+						                <td>
+						                	<?php 
+						                		foreach ($pacientes as $paciente) {
+						                		if ($consutla->Paciente == $paciente->id) {
+						                				echo "$paciente->Nombre";
+						                			}	
+						                		}
+						                	?>
+						                </td>
+						                <td><?=$consulta->Fecha?></td>
+						                <td>
+						                	Medico
+						                </td>
+						                <td><?=$cita->Observacion?></td>
+						                <td>
+					                	<!-- Split button -->
+										<div class="btn-group">
+										  <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-cog"></span></button>
+										  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    <span class="caret"></span>
+										    <span class="sr-only">Toggle Dropdown</span>
+										  </button>
+										  <ul class="dropdown-menu">
+										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+										    <li><a href="<?=URL::to('citas/eliminar/'.$cita->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
+										  </ul>
+										</div>
+										</td>
+						            </tr>
+						            <?php endforeach; ?>
+					        		<?php endif; ?>
 					        </tbody>
 					    </table>
 						  </div>
