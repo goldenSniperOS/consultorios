@@ -317,7 +317,6 @@ if(Session::exists('erroresedit')){
 				$('#formPacienteEdit [name=Nombre]').val(response.NombreCompleto);
 				$('#formPacienteEdit [name=Consultorio]').val(response.Consultorio);
 				$('#formPacienteEdit [name=Cargo]').val(response.Cargo);
-				$('#formPacienteEdit [name=Contrasena]').val(response.Contrasena);
 				$('#formPacienteEdit [name=id]').val(response.id);
 			},
 			error: function(){
