@@ -285,11 +285,6 @@ if(Session::exists('erroresedit')){
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
 	<script>
-	$('.datepicker').datepicker({
-	    startDate: "today",
-    	autoclose: true
-	});
-
 	$(document).ready(function(){
 		    $('#example').DataTable();
 		});
@@ -306,12 +301,13 @@ if(Session::exists('erroresedit')){
 		e.preventDefault();
 		$.ajax({
 			method:'post',
-			url:'<?=URL::to("citas/editarconsutaajax")?>',
+			url:'<?=URL::to("consultas/editarconsutaajax")?>',
 			dataType:'json',
 			data:{
 				id:$(this).attr('id')
 			},
 			success: function(response){
+				console.log(response);
 				$('#formConsultaEdit [name=Paciente]').val(response.Paciente);
 				$('#formConsultaEdit [name=Sintomas]').val(response.Sintomas);
 				$('#formConsultaEdit [name=Diagnostico]').val(response.Diagnostico);
