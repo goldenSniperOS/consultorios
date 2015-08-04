@@ -95,7 +95,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control datepicker" id="Fecha" data-date-start-date="today" data-date-format="dd/mm/yyyy" name="Fecha" value="<?=date('d/m/Y',time())?>" placeholder="Ingrese su Fecha DD/MM/AAAA">
+								<input required type="text" class="form-control datepicker" id="Fecha" data-date-start-date="today" data-date-format="dd/mm/yyyy" name="Fecha" value="<?=date('d/m/Y',time())?>" placeholder="Ingrese su Fecha DD/MM/AAAA">
 								<?php if(isset($errores['Fecha'])): ?>
 								<p class="help-block"><?=$errores['Fecha']?></p>
                                 <?php endif; ?>
@@ -120,7 +120,7 @@ if(Session::exists('erroresedit')){
 			            	
 							<div class="form-group">
 								<label for="Receta">Observaciones</label>
-								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese observacion"></textarea>
 							</div>
 			            </div>
 			          </div>
@@ -163,7 +163,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Fecha']))?'has-error':''?>">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" name="Fecha" placeholder="Ingrese su Fecha">
+								<input required type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" name="Fecha" placeholder="Ingrese su Fecha">
 								<?php if(isset($erroresedit['Fecha'])): ?>
 								<p class="help-block"><?=$erroresedit['Fecha']?></p>
                                 <?php endif; ?>
@@ -195,7 +195,7 @@ if(Session::exists('erroresedit')){
 			        </div>
 			      </div>        
 				      <div class="modal-footer">
-				      <input type="hidden" name="id">
+				      <input required type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
@@ -218,7 +218,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-xs-12">
 			            	<div class="form-group <?=(isset($errores['Fecha']))?'has-error':''?>">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" value="<?=date('d/m/Y',time())?>" name="Fecha" placeholder="Ingrese su Fecha">
+								<input required type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" value="<?=date('d/m/Y',time())?>" name="Fecha" placeholder="Ingrese su Fecha">
 								<?php if(isset($errores['Fecha'])): ?>
 								<p class="help-block"><?=$errores['Fecha']?></p>
                                 <?php endif; ?>
@@ -228,7 +228,7 @@ if(Session::exists('erroresedit')){
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-			      	<input type="hidden" name="CodigoCita">
+			      	<input required type="hidden" name="CodigoCita">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>
@@ -255,7 +255,7 @@ if(Session::exists('erroresedit')){
 			        <div class="container-fluid">
 			          <div class="row">
 			            <div class="col-md-6">
-							<input type="hidden" name="Paciente" id="Paciente">
+							<input required type="hidden" name="Paciente" id="Paciente">
 							<div class="form-group <?=(isset($errores['Sintomas']))?'has-error':''?>">
 								<label for="Sintomas ">Sintomas</label>
 								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
@@ -299,7 +299,7 @@ if(Session::exists('erroresedit')){
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-			      	<input type="hidden" name="CodigoCita">
+			      	<input required type="hidden" name="CodigoCita">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>

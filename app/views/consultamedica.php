@@ -94,14 +94,14 @@ if(Session::exists('erroresedit')){
 							</div>
 							<div class="form-group <?=(isset($errores['Sintomas']))?'has-error':''?>">
 								<label for="Sintomas ">Sintomas</label>
-								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+								<textarea required type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
 								<?php if(isset($errores['Sintomas'])): ?>
 								<p class="help-block"><?=$errores['Sintomas']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($errores['Diagnostico']))?'has-error':''?>">
 								<label for="Diagnostico">Diagnostico</label>
-								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+								<textarea required type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
 								<?php if(isset($errores['Diagnostico'])): ?>
 								<p class="help-block"><?=$errores['Diagnostico']?></p>
                                 <?php endif; ?>
@@ -111,21 +111,21 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Tratamiento']))?'has-error':''?>">
 								<label for="Tratamiento">Tratamiento</label>
-								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+								<textarea required type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
 								<?php if(isset($errores['Tratamiento'])): ?>
 								<p class="help-block"><?=$errores['Tratamiento']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($errores['Receta']))?'has-error':''?>">
 								<label for="Receta">Receta</label>
-								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<textarea required type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
 								<?php if(isset($errores['Receta'])): ?>
 								<p class="help-block"><?=$errores['Receta']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($errores['Observaciones']))?'has-error':''?>">
 								<label for="Observaciones">Observaciones</label>
-								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+								<textarea required type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
 								<?php if(isset($errores['Observaciones'])): ?>
 								<p class="help-block"><?=$errores['Observaciones']?></p>
                                 <?php endif; ?>
@@ -172,14 +172,14 @@ if(Session::exists('erroresedit')){
 							</div>
 							<div class="form-group <?=(isset($erroresedit['Sintomas']))?'has-error':''?>">
 								<label for="Sintomas">Sintomas</label>
-								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+								<textarea required type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
 								<?php if(isset($erroresedit['Sintomas'])): ?>
 								<p class="help-block"><?=$erroresedit['Sintomas']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($erroresedit['Diagnostico']))?'has-error':''?>">
 								<label for="Diagnostico">Diagnostico</label>
-								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+								<textarea required type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
 								<?php if(isset($erroresedit['Diagnostico'])): ?>
 								<p class="help-block"><?=$erroresedit['Diagnostico']?></p>
                                 <?php endif; ?>
@@ -189,21 +189,21 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group  <?=(isset($erroresedit['Tratamiento']))?'has-error':''?>">
 								<label for="Tratamiento">Tratamiento</label>
-								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+								<textarea required type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
 								<?php if(isset($erroresedit['Tratamiento'])): ?>
 								<p class="help-block"><?=$erroresedit['Tratamiento']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($erroresedit['Receta']))?'has-error':''?>">
 								<label for="Receta">Receta</label>
-								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<textarea required type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
 								<?php if(isset($erroresedit['Receta'])): ?>
 								<p class="help-block"><?=$erroresedit['Receta']?></p>
                                 <?php endif; ?>
 							</div>
 							<div class="form-group <?=(isset($erroresedit['Observaciones']))?'has-error':''?>">
 								<label for="Observaciones">Observaciones</label>
-								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+								<textarea required type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
 								<?php if(isset($erroresedit['Observaciones'])): ?>
 								<p class="help-block"><?=$erroresedit['Observaciones']?></p>
                                 <?php endif; ?>
@@ -253,7 +253,7 @@ if(Session::exists('erroresedit')){
 						                </td>
 						                <td><?=date('d/m/Y h:i A',strtotime(str_replace('/', '.', $consulta->Fecha)))?></td>
 						                <td>
-						                	<?=Auth::get('NombreCompleto')?>
+						                	<?=$consulta->Medico?>
 						                </td>
 						                <td><?=$consulta->Diagnostico?></td>
 						                <td>

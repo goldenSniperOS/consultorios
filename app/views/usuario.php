@@ -36,7 +36,7 @@ if(Session::exists('erroresedit')){
 				<nav>
 					<ul>
 						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
-						<?php if(Auth::hasPermission('pacientes')): ?><li><a href="<?=URL::to('pacientes/index')?>" class="active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li><?php endif; ?>
+						<?php if(Auth::hasPermission('pacientes')): ?><li><a href="<?=URL::to('pacientes/index')?>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li><?php endif; ?>
 						<?php if(Auth::hasPermission('consultas')): ?><li><a href="<?=URL::to('consultas/index')?>"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li><?php endif; ?>
 						<?php if(Auth::hasPermission('citas')): ?><li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li><?php endif; ?>
 						<li><a href="<?=URL::to('admin/estadisticas')?>"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
@@ -84,7 +84,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Documento']))?'has-error':''?>">
 								<label for="Documento">Documento</label>
-								<input type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
+								<input required type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
 								<?php if(isset($errores['Documento'])): ?>
 								<p class="help-block"><?=$errores['Documento']?></p>
                                 <?php endif; ?>
@@ -110,7 +110,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Nombre']))?'has-error':''?>">
 								<label for="Nombre">Nombre Completo</label>
-								<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
+								<input required type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
 								<?php if(isset($errores['Nombre'])): ?>
 								<p class="help-block"><?=$errores['Nombre']?></p>
                                 <?php endif; ?>
@@ -136,7 +136,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Contrasena']))?'has-error':''?>">
 								<label for="Contrasena">Contrasena</label>
-								<input type="password" class="form-control" id="Contrasena" name="Contrasena" placeholder="Ingrese su Contraseña">
+								<input required type="password" class="form-control" id="Contrasena" name="Contrasena" placeholder="Ingrese su Contraseña">
 								<?php if(isset($errores['Contrasena'])): ?>
 								<p class="help-block"><?=$errores['Contrasena']?></p>
                                 <?php endif; ?>
@@ -172,7 +172,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Documento']))?'has-error':''?>">
 								<label for="Documento">Documento</label>
-								<input type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
+								<input required type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
 								<?php if(isset($erroresedit['Documento'])): ?>
 								<p class="help-block"><?=$erroresedit['Documento']?></p>
                                 <?php endif; ?>
@@ -198,7 +198,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Nombre']))?'has-error':''?>">
 								<label for="Nombre">Nombre Completo</label>
-								<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
+								<input required type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
 								<?php if(isset($erroresedit['Nombre'])): ?>
 								<p class="help-block"><?=$erroresedit['Nombre']?></p>
                                 <?php endif; ?>
@@ -224,7 +224,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Contrasena']))?'has-error':''?>">
 								<label for="Contrasena">Contrasena</label>
-								<input type="password" class="form-control" id="Contrasena" name="Contrasena" placeholder="Ingrese su Contraseña">
+								<input required type="password" class="form-control" id="Contrasena" name="Contrasena" placeholder="Ingrese su Contraseña">
 								<?php if(isset($erroresedit['Contrasena'])): ?>
 								<p class="help-block"><?=$erroresedit['Contrasena']?></p>
                                 <?php endif; ?>
@@ -234,7 +234,7 @@ if(Session::exists('erroresedit')){
 			        </div>
 			      </div>
 				      <div class="modal-footer">
-				      <input type="hidden" name="id">
+				      <input required type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>

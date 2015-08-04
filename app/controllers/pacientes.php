@@ -182,7 +182,7 @@
                     ],
                     'Nombre' => [
                     	'required' => true,
-                        'min' => 20,
+                        'min' => 15,
                         'max' => 50
                     ],
                     'Edad' => [
@@ -251,7 +251,7 @@
                     ],
                     'Nombre' => [
                     	'required' => true,
-                        'min' => 20,
+                        'min' => 15,
                         'max' => 50
                     ],
                     'Edad' => [

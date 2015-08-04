@@ -86,7 +86,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Documento']))?'has-error':''?>" >
 								<label for="Documento">Documento</label>
-								<input type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
+								<input required type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
 								<?php if(isset($errores['Documento'])): ?>
                                     <p class="help-block"><?=$errores['Documento']?></p>
                                 <?php endif; ?>
@@ -95,7 +95,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Telefono']))?'has-error':''?>">
 								<label for="Telefono">Telefono</label>
-								<input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Ingrese su Telefono">
+								<input required type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Ingrese su Telefono">
 								<?php if(isset($errores['Telefono'])): ?>
                                     <p class="help-block"><?=$errores['Telefono']?></p>
                                 <?php endif; ?>
@@ -106,7 +106,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Nombre']))?'has-error':''?>">
 								<label for="Nombre">Nombre</label>
-								<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
+								<input required type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
 								<?php if(isset($errores['Nombre'])): ?>
                                     <p class="help-block"><?=$errores['Nombre']?></p>
                                 <?php endif; ?>
@@ -115,7 +115,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Edad']))?'has-error':''?>">
 								<label for="Edad">Edad</label>
-								<input type="text" class="form-control" id="Edad" name="Edad" placeholder="Ingrese su Edad">
+								<input required type="text" class="form-control" id="Edad" name="Edad" placeholder="Ingrese su Edad">
 								<?php if(isset($errores['Edad'])): ?>
                                     <p class="help-block"><?=$errores['Edad']?></p>
                                 <?php endif; ?>
@@ -126,7 +126,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Direccion']))?'has-error':''?>">
 								<label for="Direccion">Direccion</label>
-								<input type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Ingrese su Direccion">
+								<input required type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Ingrese su Direccion">
 								<?php if(isset($errores['Direccion'])): ?>
                                     <p class="help-block"><?=$errores['Direccion']?></p>
                                 <?php endif; ?>
@@ -157,7 +157,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($errores['Email']))?'has-error':''?>">
 								<label for="Email">Email</label>
-								<input type="email" class="form-control" id="Email" name="Email" placeholder="Ingrese su Email">
+								<input required type="email" class="form-control" id="Email" name="Email" placeholder="Ingrese su Email">
 								<?php if(isset($errores['Email'])): ?>
                                     <p class="help-block"><?=$errores['Email']?></p>
                                 <?php endif; ?>
@@ -217,7 +217,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Documento']))?'has-error':''?>" >
 								<label for="Documento">Documento</label>
-								<input type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
+								<input required type="text" class="form-control" id="Documento" name="Documento" placeholder="Ingrese su Documento">
 								<?php if(isset($erroresedit['Documento'])): ?>
                                     <p class="help-block"><?=$erroresedit['Documento']?></p>
                                 <?php endif; ?>
@@ -226,7 +226,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Telefono']))?'has-error':''?>">
 								<label for="Telefono">Telefono</label>
-								<input type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Ingrese su Telefono">
+								<input required type="text" class="form-control" id="Telefono" name="Telefono" placeholder="Ingrese su Telefono">
 								<?php if(isset($erroresedit['Telefono'])): ?>
                                     <p class="help-block"><?=$erroresedit['Telefono']?></p>
                                 <?php endif; ?>
@@ -237,7 +237,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Nombre']))?'has-error':''?>">
 								<label for="Nombre">Nombre</label>
-								<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
+								<input required type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Ingrese su Nombre">
 								<?php if(isset($erroresedit['Nombre'])): ?>
                                     <p class="help-block"><?=$erroresedit['Nombre']?></p>
                                 <?php endif; ?>
@@ -246,7 +246,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Edad']))?'has-error':''?>">
 								<label for="Edad">Edad</label>
-								<input type="text" class="form-control" id="Edad" name="Edad" placeholder="Ingrese su Edad">
+								<input required type="text" class="form-control" id="Edad" name="Edad" placeholder="Ingrese su Edad">
 								<?php if(isset($erroresedit['Edad'])): ?>
                                     <p class="help-block"><?=$erroresedit['Edad']?></p>
                                 <?php endif; ?>
@@ -257,7 +257,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Direccion']))?'has-error':''?>">
 								<label for="Direccion">Direccion</label>
-								<input type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Ingrese su Direccion">
+								<input required type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Ingrese su Direccion">
 								<?php if(isset($erroresedit['Direccion'])): ?>
                                     <p class="help-block"><?=$erroresedit['Direccion']?></p>
                                 <?php endif; ?>
@@ -288,7 +288,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Email']))?'has-error':''?>">
 								<label for="Email">Email</label>
-								<input type="email" class="form-control" id="Email" name="Email" placeholder="Ingrese su Email">
+								<input required type="email" class="form-control" id="Email" name="Email" placeholder="Ingrese su Email">
 								<?php if(isset($erroresedit['Email'])): ?>
                                     <p class="help-block"><?=$erroresedit['Email']?></p>
                                 <?php endif; ?>
@@ -317,7 +317,7 @@ if(Session::exists('erroresedit')){
 			        </div>
 			      </div>
 			      <div class="modal-footer">
-			      	<input type="hidden" name="id">
+			      	<input required type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>

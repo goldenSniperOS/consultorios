@@ -53,8 +53,11 @@
 			Cargo::update([
 				'Permisos' => $cargo->Permisos = json_encode($cargo->Permisos)
 			],$cargoIndex);
-			$grupo =  DB::getInstance()->table(Config::get('groups/table'))->where(Config::get('groups/primaryKey'),$cargoIndex)->exec()[0];
-			Session::put('ListPermission',json_decode($grupo->Permisos));
+			
+			if(Auth::get('Cargo') == $cargoIndex){
+				$grupo =  DB::getInstance()->table(Config::get('groups/table'))->where(Config::get('groups/primaryKey'),$cargoIndex)->exec()[0];
+				Session::put('ListPermission',json_decode($grupo->Permisos));
+			}
 			View::render('permisos',['cargo'=>$cargo]);
 		}
 
@@ -65,8 +68,11 @@
 			Cargo::update([
 				'Permisos' => $cargo->Permisos = json_encode($cargo->Permisos)
 			],$cargoIndex);
-			$grupo =  DB::getInstance()->table(Config::get('groups/table'))->where(Config::get('groups/primaryKey'),$cargoIndex)->exec()[0];
-			Session::put('ListPermission',json_decode($grupo->Permisos));
+			
+			if(Auth::get('Cargo') == $cargoIndex){
+				$grupo =  DB::getInstance()->table(Config::get('groups/table'))->where(Config::get('groups/primaryKey'),$cargoIndex)->exec()[0];
+				Session::put('ListPermission',json_decode($grupo->Permisos));
+			}
 			View::render('permisos',['cargo'=>$cargo]);
 		}
 

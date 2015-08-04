@@ -26,14 +26,14 @@ if(Session::exists('errores')){
 <form method="POST" action="<?=URL::to('home/login')?>">
   <div class="form-group <?=(isset($errores['DNI']))?'has-error':''?>">
     <label for="DNI">DNI</label>
-    <input type="text" class="form-control" id="DNI" name="DNI" placeholder="Ingrese su DNI">
+    <input required type="text" class="form-control" id="DNI" name="DNI" placeholder="Ingrese su DNI">
     <?php if(isset($errores['DNI'])): ?>
     <p class="help-block"><?=$errores['DNI']?></p>
     <?php endif; ?>
   </div>
   <div class="form-group <?=(isset($errores['Contrasena']))?'has-error':''?>">
     <label for="Contrasena">Password</label>
-    <input type="password" class="form-control" id="Contrasena" name="Contrasena"  placeholder="Ingrese su Contraseña">
+    <input required type="password" class="form-control" id="Contrasena" name="Contrasena"  placeholder="Ingrese su Contraseña">
   <?php if(isset($errores['Contrasena'])): ?>
   <p class="help-block"><?=$errores['Contrasena']?></p>
   <?php endif; ?>

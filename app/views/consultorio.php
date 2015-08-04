@@ -77,7 +77,7 @@ if(Session::exists('erroresedit')){
 				            <div class="col-md-12">
 				            	<div class="form-group <?=(isset($errores['NombreConsultorio']))?'has-error':''?>">
 									<label for="NombreConsultorio">Nombre del Consultorio</label>
-									<input type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
+									<input required type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
 									<?php if(isset($errores['NombreConsultorio'])): ?>
                                     <p class="help-block"><?=$errores['NombreConsultorio']?></p>
                                     <?php endif; ?>
@@ -110,7 +110,7 @@ if(Session::exists('erroresedit')){
 				            <div class="col-md-12">
 				            	<div class="form-group <?=(isset($erroresedit['NombreConsultorio']))?'has-error':''?>">
 									<label for="NombreConsultorio">Nombre del Consultorio</label>
-									<input type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
+									<input required type="text" name="NombreConsultorio" id="NombreConsultorio" class="form-control">
 									<?php if(isset($erroresedit['NombreConsultorio'])): ?>
                                     <p class="help-block"><?=$erroresedit['NombreConsultorio']?></p>
                                     <?php endif; ?>
@@ -120,7 +120,7 @@ if(Session::exists('erroresedit')){
 				        </div>
 				      </div>
 				      <div class="modal-footer">
-				      <input type="hidden" name="id">
+				      <input required type="hidden" name="id">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			        <button type="submit" class="btn btn-primary">Guardar</button>
 			      </div>

@@ -89,6 +89,7 @@
 						          <th>#</th>
 						          <th>PACIENTE</th>
 						          <th>FECHA</th>
+						          <th>ESTADO</th>
 						        </tr>
 						      </thead>
 						      <tbody>
@@ -98,6 +99,15 @@
 						          <th scope="row"><?=$i?></th>
 						          <td><span class="glyphicon glyphicon-user"></span> <?=$citas[$i-1]->Paciente?></td>
 						          <td><?=date('d/m/Y',strtotime(str_replace('/', '.', $citas[$i-1]->Fecha)))?></td>
+				                <?php if($citas[$i-1]->Atendido == "NO" && strtotime($citas[$i-1]->Fecha) < time() ): ?>
+				                <td><p class="label label-danger"> Reprogramacion</p></td>
+				            	<?php endif;?>
+				            	<?php if($citas[$i-1]->Atendido == "NO" && strtotime($citas[$i-1]->Fecha) >= time() ): ?>
+				                <td><p class="label label-warning">No Atendida</p></td>
+				            	<?php endif;?>
+				            	<?php if($citas[$i-1]->Atendido == "SI"): ?>
+				                <td><p class="label label-success">Atendida</p></td>
+				            	<?php endif;?>
 						        </tr>
 						    	<?php endfor; ?>
 						    	<?php endif; ?>

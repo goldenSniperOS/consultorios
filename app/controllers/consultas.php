@@ -9,6 +9,10 @@
 		
 		public function index(){
 			$consultas = Consulta::all();
+			$consultas = DB::getInstance()->select('consulta.id','consulta.Fecha','consulta.Diagnostico','usuario.NombreCompleto as Medico','consulta.Paciente')
+			->table('consulta')
+			->join('usuario','usuario.id','=','consulta.Medico')
+			->exec();
 			$pacientes = Paciente::all();
 			View::render('consultamedica',['consultas'=>$consultas,'pacientes' => $pacientes]);
 		}
