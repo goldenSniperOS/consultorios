@@ -67,7 +67,7 @@
 			echo json_encode($usuario);
 		}
 
-		public function editarconsultorio(){
+		public function editarusuario(){
 			$validate = new Validate();
             $validation = $validate->check($_POST,[
                     'Documento' => [

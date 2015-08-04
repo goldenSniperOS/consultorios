@@ -294,6 +294,14 @@ if(Session::exists('erroresedit')){
 		    $('#example').DataTable();
 		});
 
+	function formatDate (input) {
+	  var datePart = input.split("-"),
+	  year = datePart[0], // get only two digits
+	  month = datePart[1], day = datePart[2];
+
+	  return day+'/'+month+'/'+year;
+	}
+	
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({

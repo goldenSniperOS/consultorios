@@ -8,7 +8,7 @@ if(Session::exists('erroresedit')){
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Consultorio</title>
@@ -154,7 +154,7 @@ if(Session::exists('erroresedit')){
 			<div class="modal fade" id="formPacienteEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
-			    <form action="<?=URL::to('usuarios/editarconsultorio')?>" method="POST">
+			    <form action="<?=URL::to('usuarios/editarusuario')?>" method="POST">
 			    <?php echo (isset($erroresedit['Documento'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			    <?php echo (isset($erroresedit['NombreCompleto'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
 			    <?php echo (isset($erroresedit['Consultorio'])) ? '<script>$(document).ready(function(){$("#formPacienteEdit").modal({show:true})});</script>':''?>
@@ -300,7 +300,8 @@ if(Session::exists('erroresedit')){
 		$(document).ready(function(){
 		    $('#example').DataTable();
 		});
-
+	</script>  
+	<script>
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({
