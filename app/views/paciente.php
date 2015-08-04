@@ -375,6 +375,9 @@ if(Session::exists('erroresedit')){
 	</div>
 	<?=HTML::script('js/jquery.dataTables.min.js')?>
 	<?=HTML::script('js/bootstrap.min.js')?>
+	<?php 
+		$datos=json_encode($distritos)
+	?>
 	<script>
 		$(document).ready(function(){
 		    $('#example').DataTable();
@@ -383,7 +386,9 @@ if(Session::exists('erroresedit')){
 	<script>
 		$('.editar').on('click',function(e){
 			e.preventDefault();
+			var aux;
 			$.ajax({
+				async:false,
 				method:'post',
 				url:'<?=URL::to("pacientes/editarpacienteajax")?>',
 				dataType:'json',
@@ -402,11 +407,27 @@ if(Session::exists('erroresedit')){
 					$('#formPacienteEdit [name=Email]').val(response.Email);
 					$('#formPacienteEdit [name=Estado]').val(response.Activo);
 					$('#formPacienteEdit [name=MunicipioEdit]').val(response.Municipio);
+					aux=response.Municipio;
 				},	
 				error: function(){
 					console.log('Fracaso');
 				}
 			})
+			valor = $("#DepartamentoEdit").val();
+
+				var Distritos = eval(<?php echo $datos;?>);	
+				$("#MunicipioEdit").empty();
+				$.each(Distritos, function (i, Distrito) {
+					if(Distrito.idDepa==valor){
+						$('#MunicipioEdit').append($('<option>', { 
+				        value: Distrito.idDist,
+				        text : Distrito.distrito 
+				    }));
+
+					}
+				    
+				});
+			$('#MunicipioEdit').val(aux);
 		});
 
 		$(document).ready(function(){
@@ -418,9 +439,7 @@ if(Session::exists('erroresedit')){
 			});
 		});
 	</script>
-	<?php 
-		$datos=json_encode($distritos)
-	?>
+
 	<script>
 		$(document).ready(function(){
 			$("#Departamento").change(function(){
