@@ -358,7 +358,7 @@ if(Session::exists('erroresedit')){
 										    <li><a href="<?=URL::to('pacientes/eliminar/'.$paciente->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
 										  </ul>
 										</div>
-										<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-book"></span></button>
+										<a href="<?=URL::to('pacientes/detallehistoria/'.$paciente->id)?>" type="button" class="btn btn-info"><span class="glyphicon glyphicon-book"></span> Historia</a>
 						                </td>
 						            </tr>
 						            <?php endforeach; ?>

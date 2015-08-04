@@ -14,6 +14,14 @@
 									 ->exec();
 			View::render('paciente',['pacientes' => $pacientes,'departamentos' => $departamentos,'distritos' => $distritos]);
 		}
+
+        public function detallehistoria($param){
+            $paciente = Paciente::find($param);
+            $consultas = DB::getInstance()->select('consulta.Fecha','consulta.Diagnostico','usuario.NombreCompleto as Medico')->table('consulta')->join('usuario','usuario.id','=','consulta.Medico')->where('Paciente',$param)->exec();
+            $consultorio = Consultorio::find(Auth::get('Consultorio'));
+            View::render('detallehistoria',['paciente' => $paciente,'consultas' => $consultas,'consultorio' => $consultorio]);
+        }
+
 		public function registrarpaciente(){
 			if(Input::exists()){
 				$validate = new Validate();

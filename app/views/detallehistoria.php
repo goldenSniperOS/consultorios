@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Administrador | Consultorio</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+	<?=HTML::style('css/bootstrap.min.css')?>
+	<?=HTML::style('css/jquery.dataTables.min.css')?>
+	<?=HTML::style('css/style.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -21,7 +23,7 @@
 		</row>
 		<row>
 			<div class="col-xs-2 navegador">
-				<img src="img/user.png" alt="">
+				<?=HTML::image('img/user.png')?>
 				<nav>
 					<ul>
 						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
@@ -43,7 +45,7 @@
 			<div class="col-xs-10 contenido well">
 			<div class="alert alert-info">
 				<h3 class="text-center">
-					HISTORIAL MEDICO Osea que onda e.e
+					HISTORIAL MEDICO
 				</h3>
 			</div>
 			<div class="row">
@@ -52,18 +54,16 @@
 				</div>			
 			</div>
 			<div class="row">
-				<div class="col-xs-3"><p class="text-center"><strong>MEDICINA GENERAL</strong></p><img class="img-centered" src="img/logo.png" align="center"></div>
+				<div class="col-xs-3"><p class="text-center"><strong>MEDICINA GENERAL</strong></p><?=HTML::image('img/logo.png',['align' => 'centered','class' => 'img-centered'])?></div>
 				<div class="col-xs-4 detail-logueo">
 				<div class="col-xs-12 bloque"><p><strong>FECHA:</strong>&nbsp;<?=date('d/M/Y',time())?> | <strong>HORA: </strong>&nbsp;<?=date('H:i',time())?></p></div>
-				<div class="col-xs-12 bloque"><p><strong>USUARIO: </strong>ADMIN</p></div>
+				<div class="col-xs-12 bloque"><p><strong>USUARIO: </strong><?=Auth::get('NombreCompleto')?></p></div>
 				</div>
-			</div>
-			<div class="row">
 				<div class="col-xs-4 detail-click">
-				<p><strong>CONSULTORIO MEDICO ORIENTAL</strong></p>
-				<p><strong>PACIENTE: </strong> VERÓNICA DEL CARMEN</p>
-				<p><strong>DIRECCION: </strong> DIRECCION DE MI CASA</p>
-				<p><strong>TELEFONO: </strong> 2154632-5313515</p>
+				<p><strong><?=$consultorio->Nombre?></strong></p>
+				<p><strong>PACIENTE: </strong> <?=$paciente->Nombre?></p>
+				<p><strong>DIRECCION: </strong> <?=$paciente->Direccion?></p>
+				<p><strong>TELEFONO: </strong> <?=$paciente->Telefono?></p>
 				</div>
 			</div>
 			<div class="row">
@@ -79,24 +79,16 @@
 						        </tr>
 						      </thead>
 						      <tbody>
+						      <?php if($consultas): ?>
+						      	<?php foreach ($consultas as $consulta): ?>
 						        <tr>
-						          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td class="col-xs-7">235-45621</td>
-						          <td class="col-xs-2">ADMIN</td>
+						          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> <?=date('d/m/Y h:i A',strtotime(str_replace('/', '.', $consulta->Fecha)))?></td>
+						          <td class="col-xs-7"><?=$consulta->Diagnostico?></td>
+						          <td class="col-xs-2"><?=$consulta->Medico?></td>
 						          <td class="col-xs-1"><a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-print"></span></a></td>
 						        </tr>
-						        <tr>
-						          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td class="col-xs-7">235-45621</td>
-						          <td class="col-xs-2">ADMIN</td>
-						          <td class="col-xs-1"><a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-print"></span></a></td>
-						        </tr>
-						        <tr>
-						          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> Mark</td>
-						          <td class="col-xs-7">235-45621</td>
-						          <td class="col-xs-2">ADMIN</td>
-						          <td class="col-xs-1"><a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-print"></span></a></td>
-						        </tr>				        
+						    	<?php endforeach; ?>
+						    	<?php endif; ?>		        
 						      </tbody>
 						    </table>
 						  </div>

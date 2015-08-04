@@ -90,21 +90,15 @@
 						        </tr>
 						      </thead>
 						      <tbody>
+						        <?php if($citas): ?>
+						        <?php for ($i=1;$i<=count($citas);$i++): ?>
 						        <tr>
-						          <th scope="row">1</th>
-						          <td>Mark</td>
-						          <td>10/08/1994</td>
+						          <th scope="row"><?=$i?></th>
+						          <td><span class="glyphicon glyphicon-user"></span> <?=$citas[$i-1]->Paciente?></td>
+						          <td><?=date('d/m/Y',strtotime(str_replace('/', '.', $citas[$i-1]->Fecha)))?></td>
 						        </tr>
-						        <tr>
-						          <th scope="row">2</th>
-						          <td>Jacob</td>
-						          <td>10/08/1994</td>
-						        </tr>
-						        <tr>
-						          <th scope="row">3</th>
-						          <td>Larry</td>
-						          <td>10/08/1994</td>
-						        </tr>
+						    	<?php endfor; ?>
+						    	<?php endif; ?>
 						      </tbody>
 						    </table>
 						  </div>

@@ -231,7 +231,7 @@ if(Session::exists('erroresedit')){
 					            <tr>
 					                <th>#</th>
 					                <th>PACIENTE</th>
-					                <th>FECHA</th>
+					                <th>FECHA Y HORA DE ATENCION</th>
 					                <th>MEDICO</th>
 					                <th>DIAGNOSTICO</th>
 					                <th>OPERACIONES</th>
@@ -251,7 +251,7 @@ if(Session::exists('erroresedit')){
 						                		}
 						                	?>
 						                </td>
-						                <td><?=$consulta->Fecha?></td>
+						                <td><?=date('d/m/Y h:i A',strtotime(str_replace('/', '.', $consulta->Fecha)))?></td>
 						                <td>
 						                	<?=Auth::get('NombreCompleto')?>
 						                </td>
@@ -326,5 +326,6 @@ if(Session::exists('erroresedit')){
 			}
 		});
 	});
+	</script>
 </body>
 </html>

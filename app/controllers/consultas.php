@@ -43,7 +43,6 @@
 						'Observacion' => Input::get('Observaciones') ,
 						'Tratamiento' => Input::get('Tratamiento'),
 						'Medico' => Auth::get('id'),
-						'Fecha'	=> date('d/M/Y',time())			
 					]);
 				}else{
 					Session::flash('errores',$validation->errors());

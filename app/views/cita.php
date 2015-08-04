@@ -14,8 +14,8 @@ if(Session::exists('erroresedit')){
 	<title>Administrador | Consultorio</title>
 	<?=HTML::style('css/bootstrap.min.css')?>
 	<?=HTML::style('css/style.css')?>
-	<?=HTML::style('css/bootstrap-datepicker3.min.css')?>s
-	<?=HTML::script('js/jquery-1.11.3.min.js')?>s
+	<?=HTML::style('css/bootstrap-datepicker3.min.css')?>
+	<?=HTML::script('js/jquery-1.11.3.min.js')?>
 </head>
 <body>
 	<div class="container-fluid no-padding">
@@ -64,7 +64,7 @@ if(Session::exists('erroresedit')){
 			<?php endif; ?>
 			<!-- Modal -->
 			<div class="modal fade" id="formConsulta" role="dialog" aria-labelledby="gridSystemModalLabel">
-			  <div class="modal-dialog" role="document">
+			  <div class="modal-dialog modal-lg" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('citas/registrarcita')?>" method="POST">
 			    <?php echo (isset($errores['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
@@ -83,7 +83,7 @@ if(Session::exists('erroresedit')){
 								<select name="Paciente" id="Paciente" class="form-control">
 								<?php if($pacientes): ?>
 								<?php foreach ($pacientes as $paciente):?>
-									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
+									<option value="<?=$paciente->id?>"><?=$paciente->Documento?> - <?=$paciente->Nombre?></option>	
 								<?php endforeach; ?>
 								<?php endif; ?>
 								</select>
@@ -93,7 +93,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control datepicker" id="Fecha" name="Fecha" value="<?=date('d/m/Y',time())?>" placeholder="Ingrese su Fecha DD/MM/AAAA">
+								<input type="text" class="form-control datepicker" id="Fecha" data-date-start-date="today" data-date-format="dd/mm/yyyy" name="Fecha" value="<?=date('d/m/Y',time())?>" placeholder="Ingrese su Fecha DD/MM/AAAA">
 								<?php if(isset($errores['Fecha'])): ?>
 								<p class="help-block"><?=$errores['Fecha']?></p>
                                 <?php endif; ?>
@@ -133,8 +133,8 @@ if(Session::exists('erroresedit')){
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 			<!-- Editar -->
-			<div class="modal fade" id="formConsultaEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
-			  <div class="modal-dialog" role="document">
+			<div class="modal fade" id="formCitaEdit" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog modal-lg" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('citas/editarcita')?>" method="POST">
 			    <?php echo (isset($erroresedit['Fecha'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
@@ -161,7 +161,7 @@ if(Session::exists('erroresedit')){
 			            <div class="col-md-6">
 			            	<div class="form-group <?=(isset($erroresedit['Fecha']))?'has-error':''?>">
 								<label for="Fecha">Fecha Proxima Cita</label>
-								<input type="text" class="form-control" id="Fecha" name="Fecha" placeholder="Ingrese su Fecha AAAA/MM/DD">
+								<input type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" name="Fecha" placeholder="Ingrese su Fecha">
 								<?php if(isset($erroresedit['Fecha'])): ?>
 								<p class="help-block"><?=$erroresedit['Fecha']?></p>
                                 <?php endif; ?>
@@ -201,7 +201,111 @@ if(Session::exists('erroresedit')){
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="formReprogramarCita" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    <form action="<?=URL::to('citas/reprogramarcita')?>" method="POST">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Atender Cita</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="container-fluid">
+			          <div class="row">
+			            <div class="col-xs-12">
+			            	<div class="form-group <?=(isset($errores['Fecha']))?'has-error':''?>">
+								<label for="Fecha">Fecha Proxima Cita</label>
+								<input type="text" class="form-control datepicker" id="Fecha" data-date-format="dd/mm/yyyy" data-date-start-date="today" value="<?=date('d/m/Y',time())?>" name="Fecha" placeholder="Ingrese su Fecha">
+								<?php if(isset($errores['Fecha'])): ?>
+								<p class="help-block"><?=$errores['Fecha']?></p>
+                                <?php endif; ?>
+							</div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      <div class="modal-footer">
+			      	<input type="hidden" name="CodigoCita">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- Modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="formAtenderCita" role="dialog" aria-labelledby="gridSystemModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			    <form action="<?=URL::to('citas/atendercita')?>" method="POST">
+			     <?php echo (isset($errores['Sintomas'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Diagnostico'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Receta'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Observaciones'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($errores['Tratamiento'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Atender Cita</h4>
+			      </div>
+			      <div class="modal-body">
+			        <div class="container-fluid">
+			          <div class="row">
+			            <div class="col-md-6">
+							<input type="hidden" name="Paciente" id="Paciente">
+							<div class="form-group <?=(isset($errores['Sintomas']))?'has-error':''?>">
+								<label for="Sintomas ">Sintomas</label>
+								<textarea type="text" class="form-control" id="Sintomas" name="Sintomas" placeholder="Ingrese su Sintomas"></textarea>
+								<?php if(isset($errores['Sintomas'])): ?>
+								<p class="help-block"><?=$errores['Sintomas']?></p>
+                                <?php endif; ?>
+							</div>
+							<div class="form-group <?=(isset($errores['Diagnostico']))?'has-error':''?>">
+								<label for="Diagnostico">Diagnostico</label>
+								<textarea type="text" class="form-control" id="Diagnostico" name="Diagnostico" placeholder="Ingrese su Diagnostico"></textarea>
+								<?php if(isset($errores['Diagnostico'])): ?>
+								<p class="help-block"><?=$errores['Diagnostico']?></p>
+                                <?php endif; ?>
+							</div>
 
+			            </div>
+			            <div class="col-md-6">
+			            	<div class="form-group <?=(isset($errores['Tratamiento']))?'has-error':''?>">
+								<label for="Tratamiento">Tratamiento</label>
+								<textarea type="text" class="form-control" id="Tratamiento" name="Tratamiento" placeholder="Ingrese su Tratamiento"></textarea>
+								<?php if(isset($errores['Tratamiento'])): ?>
+								<p class="help-block"><?=$errores['Tratamiento']?></p>
+                                <?php endif; ?>
+							</div>
+							<div class="form-group <?=(isset($errores['Receta']))?'has-error':''?>">
+								<label for="Receta">Receta</label>
+								<textarea type="text" class="form-control" id="Receta" name="Receta" placeholder="Ingrese su Receta"></textarea>
+								<?php if(isset($errores['Receta'])): ?>
+								<p class="help-block"><?=$errores['Receta']?></p>
+                                <?php endif; ?>
+							</div>
+							<div class="form-group <?=(isset($errores['Observaciones']))?'has-error':''?>">
+								<label for="Observaciones">Observaciones</label>
+								<textarea type="text" class="form-control" id="Observaciones" name="Observaciones" placeholder="Ingrese su Observaciones"></textarea>
+								<?php if(isset($errores['Observaciones'])): ?>
+								<p class="help-block"><?=$errores['Observaciones']?></p>
+                                <?php endif; ?>
+							</div>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      <div class="modal-footer">
+			      	<input type="hidden" name="CodigoCita">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="submit" class="btn btn-primary">Guardar</button>
+			      </div>
+			      </form>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- Modal -->
 			<div class="row">
 				<div class="col-xs-12">
 					<ul class="list-group">
@@ -215,14 +319,15 @@ if(Session::exists('erroresedit')){
 					                <th>FECHA PROXIMA CITA</th>
 					                <th>TURNO</th>
 					                <th>OBSERVACIONES</th>
+					                <th>ESTADO</th>
 					                <th></th>
 					            </tr>
 					        </thead>		 				 
 					        <tbody>
 					            <?php if($citas): ?>
-						        	<?php foreach ($citas as $cita): ?>
+						        	<?php $counter = 1; foreach ($citas as $cita): ?>
 						            <tr>
-						                <td><?=$cita->id?></td>
+						                <td><?=$counter?></td>
 						                <td>
 						                	<?php 
 						                		foreach ($pacientes as $paciente) {
@@ -232,7 +337,7 @@ if(Session::exists('erroresedit')){
 						                		}
 						                	?>
 						                </td>
-						                <td><?=$cita->Fecha?></td>
+						                <td><?=date('d/m/Y',strtotime(str_replace('/', '.', $cita->Fecha)))?></td>
 						                <td>
 						                	<?php 
 						                	if ($cita->Horario == 'M'){
@@ -245,6 +350,15 @@ if(Session::exists('erroresedit')){
 						                	?>
 						                </td>
 						                <td><?=$cita->Observacion?></td>
+						                <?php if($cita->Atendido == "NO" && strtotime($cita->Fecha) < time() ): ?>
+						                <td><p class="btn btn-danger">Necesita Reprogramacion</p></td>
+						            	<?php endif;?>
+						            	<?php if($cita->Atendido == "NO" && strtotime($cita->Fecha) >= time() ): ?>
+						                <td><p class="btn btn-warning">No Atendida</p></td>
+						            	<?php endif;?>
+						            	<?php if($cita->Atendido == "SI"): ?>
+						                <td><p class="btn btn-success">Atendida</p></td>
+						            	<?php endif;?>
 						                <td>
 					                	<!-- Split button -->
 										<div class="btn-group">
@@ -254,13 +368,22 @@ if(Session::exists('erroresedit')){
 										    <span class="sr-only">Toggle Dropdown</span>
 										  </button>
 										  <ul class="dropdown-menu">
-										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formConsultaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
+										  	<li><a id="<?=$cita->id?>" class="editar" href="#" data-toggle="modal" data-target="#formCitaEdit"><span class="glyphicon glyphicon-edit"></span> Editar</a></li>
 										    <li><a href="<?=URL::to('citas/eliminar/'.$cita->id)?>" class="eliminar"><span class="glyphicon glyphicon-trash"></span> Eliminar</a></li>
+										    
+										    <?php if($cita->Atendido == "NO" && strtotime($cita->Fecha) < time() ): ?>
+							                <li><a href="#" data-toggle="modal" id="<?=$cita->id?>" data-paciente="<?=$cita->Paciente?>" data-target="#formReprogramarCita" class="reprogramar"><span class="glyphicon glyphicon-book"></span> Reprogramar</a></li>
+							            	<?php endif;?>
+							            	<?php if($cita->Atendido == "NO" && strtotime($cita->Fecha) >= time() ): ?>
+							                <li><a href="#" data-toggle="modal" id="<?=$cita->id?>" data-paciente="<?=$cita->Paciente?>" data-target="#formAtenderCita" class="atender"><span class="glyphicon glyphicon-book"></span> Atender</a></li>
+							            	<?php endif;?>
+							            	<?php if($cita->Atendido == "SI"): ?>
+							            	<?php endif;?>
 										  </ul>
 										</div>
 										</td>
 						            </tr>
-						            <?php endforeach; ?>
+						            <?php $counter++; endforeach; ?>
 					        		<?php endif; ?>
 					        </tbody>
 					    </table>
@@ -282,6 +405,25 @@ if(Session::exists('erroresedit')){
     	autoclose: true
 	});
 
+	$('.atender').on('click',function(e){
+		e.preventDefault();
+		$('#formAtenderCita input[name="CodigoCita"]').val($(this).attr('id'));
+		$('#formAtenderCita input[name="Paciente"]').val($(this).data('paciente'));
+	});
+
+	$('.reprogramar').on('click',function(e){
+		e.preventDefault();
+		$('#formReprogramarCita input[name="CodigoCita"]').val($(this).attr('id'));
+	});
+
+	function formatDate (input) {
+	  var datePart = input.split("-"),
+	  year = datePart[0], // get only two digits
+	  month = datePart[1], day = datePart[2];
+
+	  return day+'/'+month+'/'+year;
+	}
+
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({
@@ -292,11 +434,11 @@ if(Session::exists('erroresedit')){
 				id:$(this).attr('id')
 			},
 			success: function(response){
-				$('#formConsultaEdit [name=Paciente]').val(response.Paciente);
-				$('#formConsultaEdit [name=Fecha]').val(response.Fecha);
-				$('#formConsultaEdit [name=Horario]').val(response.Horario);
-				$('#formConsultaEdit [name=Receta]').val(response.Observacion);
-				$('#formConsultaEdit [name=id]').val(response.id);
+				$('#formCitaEdit [name=Paciente]').val(response.Paciente);
+				$('#formCitaEdit [name=Fecha]').val(formatDate(response.Fecha));
+				$('#formCitaEdit [name=Horario]').val(response.Horario);
+				$('#formCitaEdit [name=Receta]').val(response.Observacion);
+				$('#formCitaEdit [name=id]').val(response.id);
 			},
 			error: function(){
 				console.log('Fracaso');
