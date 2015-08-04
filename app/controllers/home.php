@@ -2,14 +2,19 @@
 class Home
 {
 	public function __construct(){
-		if(Auth::isLoggedIn()){
+		/*if(Auth::isLoggedIn()){
 			Redirect::to('admin/index');
-		}
+		}*/
 	}
 
 	public function index(){
 		View::render('index');
 	}
+
+	public function test(){
+		var_dump($_SESSION);
+	}
+
 
 	public function login(){
 		if(Input::exists()){

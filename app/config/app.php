@@ -98,6 +98,7 @@ return array(
 		'user_class' => 'Usuario',
 		'userField' => 'Documento',
 		'passwordField' => 'Contrasena',
+		'foreignGroup' => 'Cargo'
 	]
 );
 

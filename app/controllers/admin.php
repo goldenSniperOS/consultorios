@@ -13,7 +13,6 @@
 			View::render('admin',['pacientes'=> $pacientes,'citas' => $citas]);
 		}
 
-
 		public function logout(){
 			Auth::logout();
 			Redirect::to('home/index');

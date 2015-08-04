@@ -36,11 +36,12 @@ if(Session::exists('erroresedit')){
 				<nav>
 					<ul>
 						<li><a href="<?=URL::to('admin/index')?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Inicio</a></li>
-						<li><a href="<?=URL::to('pacientes/index')?>" class="active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
-						<li><a href="<?=URL::to('consultas/index')?>"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
-						<li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
+						<?php if(Auth::hasPermission('pacientes')): ?><li><a href="<?=URL::to('pacientes/index')?>" class="active"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li><?php endif; ?>
+						<?php if(Auth::hasPermission('consultas')): ?><li><a href="<?=URL::to('consultas/index')?>"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li><?php endif; ?>
+						<?php if(Auth::hasPermission('citas')): ?><li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li><?php endif; ?>
 						<li><a href="<?=URL::to('admin/estadisticas')?>"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
 						</li>
+						<?php if(Auth::hasPermission('admin')): ?>
 						<li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
 						        <li><a href="<?=URL::to('usuarios/index')?>">Usuarios</a></li>
@@ -48,6 +49,7 @@ if(Session::exists('erroresedit')){
 						        <li><a href="<?=URL::to('consultorios/index')?>">Consultorios</a></li>
 						     </ul>
 						</li>
+						<?php endif; ?>
 					</ul>
 				</nav>
 			</div>
