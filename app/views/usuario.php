@@ -312,6 +312,7 @@ if(Session::exists('erroresedit')){
 				id:$(this).attr('id')
 			},
 			success: function(response){
+				console.log(response);
 				$('#formPacienteEdit [name=Documento]').val(response.Documento);
 				$('#formPacienteEdit [name=Nombre]').val(response.NombreCompleto);
 				$('#formPacienteEdit [name=Consultorio]').val(response.Consultorio);

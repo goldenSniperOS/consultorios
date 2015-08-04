@@ -9,7 +9,7 @@
 		
 		public function index(){
 			$usuarios = DB::getInstance()->table('usuario')
-										->select('usuario.Documento',
+										->select('usuario.id','usuario.Documento',
 												'usuario.NombreCompleto',
 												'cargo.Nombre as Cargo',
 												'usuario.Activo')
