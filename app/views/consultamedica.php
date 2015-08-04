@@ -145,11 +145,11 @@ if(Session::exists('erroresedit')){
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			    <form action="<?=URL::to('consultas/editarconsulta')?>" method="POST">
-			    <?php echo (isset($erroresedit['Sintomas'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
-			    <?php echo (isset($erroresedit['Diagnostico'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
-			    <?php echo (isset($erroresedit['Receta'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
-			    <?php echo (isset($erroresedit['Observaciones'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
-			    <?php echo (isset($erroresedit['Tratamiento'])) ? '<script>$(document).ready(function(){$("#formConsulta").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Sintomas'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Diagnostico'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Receta'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Observaciones'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
+			    <?php echo (isset($erroresedit['Tratamiento'])) ? '<script>$(document).ready(function(){$("#formConsultaEdit").modal({show:true})});</script>':''?>
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title text-center" id="gridSystemModalLabel">Editar Consulta</h4>
@@ -162,11 +162,9 @@ if(Session::exists('erroresedit')){
 								<label for="Paciente">Paciente</label>
 								<?php if($pacientes): ?>
 								<select name="Paciente" id="Paciente" class="form-control">
-								<?php if($pacientes): ?>
 								<?php foreach ($pacientes as $paciente):?>
 									<option value="<?=$paciente->id?>"><?=$paciente->Nombre?></option>
 								<?php endforeach; ?>
-								<?php endif; ?>
 								</select>
 								<?php endif; ?>
 							</div>
@@ -296,6 +294,14 @@ if(Session::exists('erroresedit')){
 		    $('#example').DataTable();
 		});
 
+	function formatDate (input) {
+	  var datePart = input.split("-"),
+	  year = datePart[0], // get only two digits
+	  month = datePart[1], day = datePart[2];
+
+	  return day+'/'+month+'/'+year;
+	}
+
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({
@@ -312,6 +318,7 @@ if(Session::exists('erroresedit')){
 				$('#formConsultaEdit [name=Receta]').val(response.Receta);
 				$('#formConsultaEdit [name=Observaciones]').val(response.Observacion);
 				$('#formConsultaEdit [name=Tratamiento]').val(response.Tratamiento);
+				$('#formCitaEdit [name=id]').val(response.id);
 			},
 			error: function(){
 				console.log('Fracaso');

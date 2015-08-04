@@ -34,7 +34,7 @@
                     ]
                 ]);
                 if($validation->passed()){
-                	/*Insercion de un Usuario*/
+                	/*Insercion de un Consulta*/
 					Consulta::create([
 						'Paciente' =>  Input::get('Paciente'),
 						'Sintomas' => Input::get('Sintomas'),
@@ -53,8 +53,8 @@
 
 		public function editarconsutaajax(){
 			$id = Input::get('id');
-			$citas = Consulta::find($id);
-			echo json_encode($cita);
+			$consultas = Consulta::find($id);
+			echo json_encode($consulta);
 		}
 
 		public function editarconsulta(){
