@@ -19,4 +19,12 @@
 			Redirect::to('home/index');
 		}
 
+		public function test($param){
+			
+		}
+
+		public function test1($param,$consulta){
+			
+		}
+
 	}

@@ -50,7 +50,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-2 col-xs-offset-5">
-					<a href="#" class="btn btn-lg btn-default center-block"><span class="glyphicon glyphicon-print"></span> Imprimir</a>
+					<a href="<?=URL::to('pacientes/historiatotal/'.$paciente->id)?>" class="btn btn-lg btn-default center-block"><span class="glyphicon glyphicon-print"></span> Imprimir</a>
 				</div>			
 			</div>
 			<div class="row">
@@ -69,29 +69,29 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="bs-example" data-example-id="striped-table">
-						    <table class="table table-striped table-bordered">
-						      <thead>
-						        <tr>
-						          <th>FECHA</th>
-						          <th>DIAGNOSTICO</th>
-						          <th>MEDICO</th>
-						          <th></th>
-						        </tr>
-						      </thead>
-						      <tbody>
-						      <?php if($consultas): ?>
-						      	<?php foreach ($consultas as $consulta): ?>
-						        <tr>
-						          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> <?=date('d/m/Y h:i A',strtotime(str_replace('/', '.', $consulta->Fecha)))?></td>
-						          <td class="col-xs-7"><?=$consulta->Diagnostico?></td>
-						          <td class="col-xs-2"><?=$consulta->Medico?></td>
-						          <td class="col-xs-1"><a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-print"></span></a></td>
-						        </tr>
-						    	<?php endforeach; ?>
-						    	<?php endif; ?>		        
-						      </tbody>
-						    </table>
-						  </div>
+					    <table class="table table-striped table-bordered">
+					      <thead>
+					        <tr>
+					          <th>FECHA</th>
+					          <th>DIAGNOSTICO</th>
+					          <th>MEDICO</th>
+					          <th></th>
+					        </tr>
+					      </thead>
+					      <tbody>
+					      <?php if($consultas): ?>
+					      	<?php foreach ($consultas as $consulta): ?>
+					        <tr>
+					          <td class="col-xs-2"><span class="glyphicon glyphicon-user"></span> <?=date('d/m/Y h:i A',strtotime(str_replace('/', '.', $consulta->Fecha)))?></td>
+					          <td class="col-xs-7"><?=$consulta->Diagnostico?></td>
+					          <td class="col-xs-2"><?=$consulta->Medico?></td>
+					          <td class="col-xs-1"><a href="<?=URL::to('pacientes/detalleconsulta/'.$paciente->id.'/'.$consulta->id)?>" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-print"></span></a></td>
+					        </tr>
+					    	<?php endforeach; ?>
+					    	<?php endif; ?>		        
+					      </tbody>
+					    </table>
+					  </div>
 				</div>
 			</div>
 			</div>
