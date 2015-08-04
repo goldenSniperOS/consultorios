@@ -294,14 +294,6 @@ if(Session::exists('erroresedit')){
 		    $('#example').DataTable();
 		});
 
-	function formatDate (input) {
-	  var datePart = input.split("-"),
-	  year = datePart[0], // get only two digits
-	  month = datePart[1], day = datePart[2];
-
-	  return day+'/'+month+'/'+year;
-	}
-
 	$('.editar').on('click',function(e){
 		e.preventDefault();
 		$.ajax({
@@ -318,7 +310,7 @@ if(Session::exists('erroresedit')){
 				$('#formConsultaEdit [name=Receta]').val(response.Receta);
 				$('#formConsultaEdit [name=Observaciones]').val(response.Observacion);
 				$('#formConsultaEdit [name=Tratamiento]').val(response.Tratamiento);
-				$('#formCitaEdit [name=id]').val(response.id);
+				$('#formConsultaEdit [name=id]').val(response.id);
 			},
 			error: function(){
 				console.log('Fracaso');

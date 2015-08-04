@@ -54,7 +54,7 @@
 		public function editarconsutaajax(){
 			$id = Input::get('id');
 			$consultas = Consulta::find($id);
-			echo json_encode($consulta);
+			echo json_encode($consultas);
 		}
 
 		public function editarconsulta(){
