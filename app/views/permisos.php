@@ -29,7 +29,7 @@
 						<li><a href="<?=URL::to('pacientes/index')?>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Pacientes</a></li>
 						<li><a href="<?=URL::to('consultas/index')?>"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Consultas Médicas</a></li>
 						<li><a href="<?=URL::to('citas/index')?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Citas Médicas</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
+						<li><a href="<?=URL::to('admin/estadisticas')?>"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>Estadísticas</a>
 						</li>
 						<li class="open"><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Administración</a>
 							<ul class="submenu">
